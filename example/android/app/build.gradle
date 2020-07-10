@@ -54,33 +54,9 @@ flutter {
     source '../..'
 }
 
-repositories {
-    jcenter()
-    flatDir {
-        dirs '../../../android/libs'
-    }
-}
-
 dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
-    implementation fileTree(dir: '../../../android/libs', include: ['*.jar'])
     implementation 'androidx.multidex:multidex:2.0.0'
-    implementation 'com.google.android.gms:play-services-ads:15.0.0'
-    implementation 'com.google.android.gms:play-services-location:15.0.0'
-    implementation 'com.squareup.picasso:picasso:2.5.2' //for Inmobi
-    implementation name: 'adcolony-sdk-3.2.1', ext: 'aar'
-    implementation name: 'mmedia-6.4.0', ext: 'aar'
-    implementation name: 'mobvista_alphab', ext: 'aar'
-    implementation name: 'mobvista_common', ext: 'aar'
-    implementation name: 'mobvista_interstitial', ext: 'aar'
-    implementation name: 'mobvista_mvdownloads', ext: 'aar'
-    implementation name: 'mobvista_mvjscommon', ext: 'aar'
-    implementation name: 'mobvista_mvnative', ext: 'aar'
-    implementation name: 'mobvista_nativeex', ext: 'aar'
-    implementation name: 'mobvista_playercommon', ext: 'aar'
-    implementation name: 'mobvista_reward', ext: 'aar'
-    implementation name: 'mobvista_videocommon', ext: 'aar'
-    implementation name: 'mobvista_videofeeds', ext: 'aar'
 }

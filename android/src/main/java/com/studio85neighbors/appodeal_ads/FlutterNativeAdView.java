@@ -2,6 +2,7 @@ package com.studio85neighbors.appodeal_ads;
 
 import android.content.Context;
 
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -28,9 +29,12 @@ public class FlutterNativeAdView implements PlatformView, MethodCallHandler {
   private final MethodChannel methodChannel;
 
   private final NativeAdView nativeAdView;
+  private final Context _context;
 
   FlutterNativeAdView(Context context, BinaryMessenger messenger, int id) {
-    nativeAdView = new NativeAdView(context);
+    _context = context;
+    nativeAdView = (NativeAdView) LayoutInflater.from(context).inflate(R.layout.native_ads_view, null);
+
     nativeAdView.setVisibility(View.INVISIBLE);
 
     methodChannel = new MethodChannel(messenger, "plugins.appodeal/nativeAd_" + id);
@@ -50,7 +54,9 @@ public class FlutterNativeAdView implements PlatformView, MethodCallHandler {
   }
 
   private void loadAd(Result result) {
+    System.out.print("START LOAD ADS");
     List<NativeAd> ads = Appodeal.getNativeAds(1);
+    System.out.print("NUMBER ADS = " + ads.size());
 
     NativeAd nativeAd = ads.get(0);
 
@@ -76,7 +82,7 @@ public class FlutterNativeAdView implements PlatformView, MethodCallHandler {
     ctaButton.setText(nativeAd.getCallToAction());
     nativeAdView.setCallToActionView(ctaButton);
 
-    View providerView = nativeAd.getProviderView(this);
+    View providerView = nativeAd.getProviderView(_context);
     if (providerView != null) {
         if (providerView.getParent() != null && providerView.getParent() instanceof ViewGroup) {
             ((ViewGroup) providerView.getParent()).removeView(providerView);
@@ -111,4 +117,7 @@ public class FlutterNativeAdView implements PlatformView, MethodCallHandler {
   public View getView() {
     return nativeAdView;
   }
+
+  @Override
+  public void dispose() {}
 }

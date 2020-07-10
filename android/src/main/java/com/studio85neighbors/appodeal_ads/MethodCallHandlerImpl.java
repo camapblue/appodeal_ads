@@ -135,7 +135,7 @@ final class MethodCallHandlerImpl implements MethodCallHandler, RewardedVideoCal
 
   // Appodeal Rewarded Video Callbacks
   @Override
-  public void onRewardedVideoLoaded() {
+  public void onRewardedVideoLoaded(boolean isPrecache) {
     channel.invokeMethod("onRewardedVideoLoaded", argumentsMap());
   }
 
@@ -150,12 +150,27 @@ final class MethodCallHandlerImpl implements MethodCallHandler, RewardedVideoCal
   }
 
   @Override
-  public void onRewardedVideoFinished(int i, String s) {
+  public void onRewardedVideoShowFailed() {
+    // Called when rewarded video show failed
+  }
+
+  @Override
+  public void onRewardedVideoFinished(double i, String s) {
     channel.invokeMethod("onRewardedVideoFinished", argumentsMap());
+  }
+
+  @Override
+  public void onRewardedVideoClicked() {
+    channel.invokeMethod("onRewardedVideoClicked", argumentsMap());
   }
 
   @Override
   public void onRewardedVideoClosed(boolean b) {
     channel.invokeMethod("onRewardedVideoWillDismiss", argumentsMap());
+  }
+
+  @Override
+  public void onRewardedVideoExpired() {
+    // Called when rewarded video is expired
   }
 }

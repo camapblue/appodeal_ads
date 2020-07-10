@@ -89,7 +89,9 @@ class _MyAppState extends State<MyApp> {
                 color: Colors.red,
                 child: FlatButton(
                   onPressed: () async {
-                    if (await this.isNativeAdsLoaded() && _nativeAdViewController != null) {
+                    final isLoaded = await this.isNativeAdsLoaded(); 
+                    print('NATIVE AD VIEW CREATED = $isLoaded');
+                    if (isLoaded && _nativeAdViewController != null) {
                       _nativeAdViewController.loadAd();
                     }
                   },
@@ -102,6 +104,7 @@ class _MyAppState extends State<MyApp> {
                 color: Colors.amberAccent,
                 child: NativeAdView(
                   onNativeAdViewCreated: (controller) {
+                    print('NATIVE AD VIEW CREATED');
                     _nativeAdViewController = controller;
                   },
                 ),
