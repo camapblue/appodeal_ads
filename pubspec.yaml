@@ -1,6 +1,6 @@
 name: appodeal_ads
 description: A Flutter plugin for Appodel SDK
-version: 0.2.3
+version: 0.2.4
 homepage: https://github.com/camapblue/appodeal_ads
 
 environment:

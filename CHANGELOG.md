@@ -13,3 +13,7 @@
 ## [0.2.3] - Published July 8, 2020.
 
 * Release: Fix NativeAds
+
+## [0.2.4] - Published July 10, 2020.
+
+* Release: Refactor to use gradble instead of static libs for Android
