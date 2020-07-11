@@ -104,7 +104,7 @@ class _MyAppState extends State<MyApp> {
                 color: Colors.amberAccent,
                 child: NativeAdView(
                   onNativeAdViewCreated: (controller) {
-                    print('NATIVE AD VIEW CREATED');
+                    print('NATIVE AD VIEW CREATED = $controller');
                     _nativeAdViewController = controller;
                   },
                 ),

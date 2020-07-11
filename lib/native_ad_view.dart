@@ -10,7 +10,6 @@ class NativeAdView extends StatefulWidget {
     this.onNativeAdViewCreated,
   }) : super(key: key);
 
-
   final NativeAdViewCreatedCallback onNativeAdViewCreated;
 
   @override
@@ -26,14 +25,23 @@ class _NativeAdViewState extends State<NativeAdView> {
         onPlatformViewCreated: _onPlatformViewCreated,
       );
     }
-    return Text(
-        '$defaultTargetPlatform is not yet supported by the Native Ad View plugin');
+    return UiKitView(
+      key: UniqueKey(),
+      creationParams: <String, dynamic>{
+        "width": MediaQuery.of(context).size.width,
+        "height": 128,
+      },
+      viewType: 'plugins.appodeal/nativeAd',
+      creationParamsCodec: const StandardMessageCodec(),
+      onPlatformViewCreated: _onPlatformViewCreated,
+    );
   }
 
   void _onPlatformViewCreated(int id) {
     if (widget.onNativeAdViewCreated == null) {
       return;
     }
+    print('NAT VIEW ID = $id');
     widget.onNativeAdViewCreated(NativeAdViewController._(id));
   }
 }

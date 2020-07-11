@@ -1,5 +1,6 @@
 #import "AppodealAdsPlugin.h"
 #import "MethodCallHandler.h"
+#import "NativeAdViewFactory.h"
 #import <Appodeal/Appodeal.h>
 
 @implementation AppodealAdsPlugin
@@ -10,6 +11,8 @@
 
     [Appodeal setRewardedVideoDelegate:methodHandler];
     [registrar addMethodCallDelegate:methodHandler channel:[methodHandler channel]];
+    [registrar registerViewFactory: [[NativeAdViewFactory alloc] initWithMessenger:registrar.messenger] withId:@"plugins.appodeal/nativeAd"];
+    NSLog(@"FINISHED REGISTER NOW HEHE");
 }
 
 @end
