@@ -1,5 +1,4 @@
 #import <Flutter/Flutter.h>
-#import "ASNativeView.h"
 
 @interface FlutterNativeAdView: NSObject<FlutterPlatformView>
 
@@ -8,6 +7,6 @@
                arguments: (id)args
                binaryMessager: (NSObject<FlutterBinaryMessenger>*) messenger;
 
-- (ASNativeView*)view;
+- (UIView*)view;
 
 @end

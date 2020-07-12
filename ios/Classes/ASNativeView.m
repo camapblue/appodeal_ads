@@ -6,7 +6,7 @@
 //
 
 #import "ASNativeView.h"
-
+#import "AppodealAdsPlugin.h"
 
 @interface ASNativeView ()
 //required
@@ -23,7 +23,10 @@
 @implementation ASNativeView
 
 + (UINib *)nib {
-    return [UINib nibWithNibName:@"Native" bundle:[NSBundle mainBundle]];
+    NSBundle *b = [NSBundle bundleForClass:[self class]];
+    NSBundle *resourceBundle = [NSBundle bundleWithURL:[b URLForResource:@"AppodealBundle" withExtension:@"bundle"]];
+    
+    return [UINib nibWithNibName:@"Native" bundle:resourceBundle];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {

@@ -18,7 +18,6 @@
 
 - (instancetype)initWithFrame:(CGRect)frame viewIdentifier:(int64_t)viewId arguments:(id)args binaryMessager:(NSObject<FlutterBinaryMessenger> *)messenger {
     NSString* channelName = [NSString stringWithFormat:@"plugins.appodeal/nativeAd_%lld", viewId];
-    NSLog(@"INIT VIEW WITH CHANNEL NAME = %@", channelName);
     self = [super init];
     if (self) {
         _container = [[UIView alloc] initWithFrame:frame];
@@ -34,7 +33,6 @@
                                                       autocache:YES];
 
         [self.nativeAdQueue loadAd];
-        NSLog(@"FINISHED INIT NATIVE AD VIEW");
     }
     __block FlutterNativeAdView *blocksafeSelf = self;
     _channel = [FlutterMethodChannel methodChannelWithName:channelName binaryMessenger:messenger];
@@ -42,9 +40,6 @@
       if ([@"loadAd" isEqualToString:call.method]) {
         bool isInitialized = [Appodeal isInitalizedForAdType: AppodealAdTypeNativeAd];
         bool isInitializedInterstitial = [Appodeal isInitalizedForAdType: AppodealAdTypeInterstitial];
-
-        NSLog(@"Start LOAD AD = %@", isInitialized == true ? @"true" : @"false");
-        NSLog(@"ALA LA = %@", isInitializedInterstitial == true ? @"true" : @"false");
 
         [blocksafeSelf loadAd:result];
       } 
@@ -58,10 +53,7 @@
 
 - (void)loadAd:(FlutterResult)result {
   UIViewController *rootViewController = [UIApplication sharedApplication].delegate.window.rootViewController;
-  NSLog(@"NATIVE QUEUE = %@", self.nativeAdQueue);
-
   APDNativeAd * nativeAd = [[self.nativeAdQueue getNativeAdsOfCount:1] firstObject];
-  NSLog(@"GOT NATIVE AD = %@", nativeAd);
   if (nativeAd != nil) {
     nativeAd.delegate = self;
   }
@@ -77,13 +69,10 @@
       [self.nativeView.bottomAnchor constraintEqualToAnchor:_container.bottomAnchor]
   ]];
 
-  NSLog(@"HAVE NATIVE AD NOW = %@", self.nativeView);
-
   result([NSNumber numberWithBool:YES]);
 }
 
 - (UIView*)view {
-  NSLog(@"RENDER AD = %@", self.nativeView);
     return _container;
 }
 
