@@ -40,6 +40,9 @@
     
     self.callToActionLabel.layer.cornerRadius = 8.0;
     self.callToActionLabel.layer.masksToBounds = YES;
+
+    NSLog(@"TITLE = %@", self.titleLabel);
+    self.backgroundColor = [UIColor redColor];
 }
 
 @end

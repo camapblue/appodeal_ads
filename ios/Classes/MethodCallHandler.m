@@ -23,13 +23,16 @@
   if ([@"initialize" isEqualToString:call.method]) {
       NSString* appKey = call.arguments[@"appKey"];
       NSArray* types = call.arguments[@"types"];
+      NSLog(@"TOTAL TYPES = %d", [types count]);
       AppodealAdType type = types.count > 0 ? [self typeFromParameter:types.firstObject] : AppodealAdTypeInterstitial;
       int i = 1;
       while (i < types.count) {
           type = type | [self typeFromParameter:types[i]];
           i++;
       }
+      NSLog(@"INTIALIZE with TYPE = %d", type);
       [Appodeal initializeWithApiKey:appKey types:type];
+      [Appodeal setLogLevel:APDLogLevelVerbose];
       result([NSNumber numberWithBool:YES]);
   } else if ([@"showInterstitial" isEqualToString:call.method]) {
       [Appodeal showAd:AppodealShowStyleInterstitial rootViewController:rootViewController];
@@ -49,8 +52,14 @@
     switch ([parameter intValue]) {
         case 0:
             return AppodealAdTypeInterstitial;
+        case 2:
+            return AppodealAdTypeBanner;
+        case 3:
+            return AppodealAdTypeNativeAd;
         case 4:
             return AppodealAdTypeRewardedVideo;
+        case 5:
+            return AppodealAdTypeMREC;
             
         default:
             break;

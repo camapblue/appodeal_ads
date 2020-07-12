@@ -5,12 +5,15 @@
 
 @interface FlutterNativeAdView() <APDNativeAdQueueDelegate, APDNativeAdPresentationDelegate> 
 
+@property (nonatomic, strong) APDNativeAdQueue *nativeAdQueue;
+@property (nonatomic, strong) ASNativeView *nativeView;
+
 @end
 
 @implementation FlutterNativeAdView {
     FlutterMethodChannel* _channel;
-    ASNativeView* nativeView;
-    APDNativeAdQueue* nativeAdQueue;
+
+    UIView *_container;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame viewIdentifier:(int64_t)viewId arguments:(id)args binaryMessager:(NSObject<FlutterBinaryMessenger> *)messenger {
@@ -18,22 +21,34 @@
     NSLog(@"INIT VIEW WITH CHANNEL NAME = %@", channelName);
     self = [super init];
     if (self) {
-        nativeAdQueue = [[APDNativeAdQueue alloc] init];
-        nativeAdQueue.settings = [APDNativeAdSettings defaultSettings];
-        nativeAdQueue.settings.adViewClass = ASNativeView.class;
-        nativeAdQueue.delegate = self;
-        nativeAdQueue.settings.autocacheMask = APDNativeResourceAutocacheIcon | APDNativeResourceAutocacheMedia;
+        _container = [[UIView alloc] initWithFrame:frame];
+        _container.backgroundColor = [UIColor greenColor];
 
-        [nativeAdQueue loadAd];
+        APDNativeAdSettings * setting = [APDNativeAdSettings new];
+        setting.adViewClass = ASNativeView.class;
+        setting.type = APDNativeAdTypeAuto;
+        
+        self.nativeAdQueue = [APDNativeAdQueue nativeAdQueueWithSdk:nil
+                                                       settings:setting
+                                                       delegate:self
+                                                      autocache:YES];
+
+        [self.nativeAdQueue loadAd];
         NSLog(@"FINISHED INIT NATIVE AD VIEW");
     }
+    __block FlutterNativeAdView *blocksafeSelf = self;
     _channel = [FlutterMethodChannel methodChannelWithName:channelName binaryMessenger:messenger];
     [_channel setMethodCallHandler: ^(FlutterMethodCall *call, FlutterResult result) {
       if ([@"loadAd" isEqualToString:call.method]) {
-        NSLog(@"Start LOAD AD");
+        bool isInitialized = [Appodeal isInitalizedForAdType: AppodealAdTypeNativeAd];
+        bool isInitializedInterstitial = [Appodeal isInitalizedForAdType: AppodealAdTypeInterstitial];
 
-        [self loadAd:result];
-      } else {
+        NSLog(@"Start LOAD AD = %@", isInitialized == true ? @"true" : @"false");
+        NSLog(@"ALA LA = %@", isInitializedInterstitial == true ? @"true" : @"false");
+
+        [blocksafeSelf loadAd:result];
+      } 
+      else {
         result(FlutterMethodNotImplemented);
       }
     }];
@@ -42,25 +57,34 @@
 }
 
 - (void)loadAd:(FlutterResult)result {
-  // UIViewController *rootViewController = [UIApplication sharedApplication].delegate.window.rootViewController;
-  NSLog(@"NATIVE QUEUE = %@", nativeAdQueue);
+  UIViewController *rootViewController = [UIApplication sharedApplication].delegate.window.rootViewController;
+  NSLog(@"NATIVE QUEUE = %@", self.nativeAdQueue);
 
-  APDNativeAd * nativeAd = [[nativeAdQueue getNativeAdsOfCount:1] firstObject];
+  APDNativeAd * nativeAd = [[self.nativeAdQueue getNativeAdsOfCount:1] firstObject];
   NSLog(@"GOT NATIVE AD = %@", nativeAd);
   if (nativeAd != nil) {
     nativeAd.delegate = self;
-  } else {
-    // [Appodeal getNativeAds:1];
   }
-  nativeView = [nativeAd getAdViewForController:self];
+  
+  self.nativeView = [nativeAd getAdViewForController:rootViewController];
+  [_container addSubview: self.nativeView];
 
-  NSLog(@"HAVE NATIVE AD NOW = %@", nativeView);
+  self.nativeView.translatesAutoresizingMaskIntoConstraints = NO;
+  [NSLayoutConstraint activateConstraints:@[
+      [self.nativeView.leftAnchor constraintEqualToAnchor:_container.leftAnchor],
+      [self.nativeView.rightAnchor constraintEqualToAnchor:_container.rightAnchor],
+      [self.nativeView.topAnchor constraintEqualToAnchor:_container.topAnchor],
+      [self.nativeView.bottomAnchor constraintEqualToAnchor:_container.bottomAnchor]
+  ]];
+
+  NSLog(@"HAVE NATIVE AD NOW = %@", self.nativeView);
 
   result([NSNumber numberWithBool:YES]);
 }
 
-- (ASNativeView*)view {
-    return nativeView == nil ? [[UIView alloc] init] : nativeView;
+- (UIView*)view {
+  NSLog(@"RENDER AD = %@", self.nativeView);
+    return _container;
 }
 
 - (void)adQueueAdIsAvailable:(APDNativeAdQueue *)adQueue ofCount:(NSUInteger)count {
