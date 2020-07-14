@@ -3,7 +3,9 @@ PODS:
   - appodeal_ads (0.0.1):
     - Appodeal
     - Flutter
+    - HCSStarRatingView
   - Flutter (1.0.0)
+  - HCSStarRatingView (1.5)
 
 DEPENDENCIES:
   - appodeal_ads (from `.symlinks/plugins/appodeal_ads/ios`)
@@ -12,6 +14,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Appodeal
+    - HCSStarRatingView
 
 EXTERNAL SOURCES:
   appodeal_ads:
@@ -21,8 +24,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Appodeal: 8b7785dda5b698d688fc9ff7872e2f8f395af638
-  appodeal_ads: e5cd7003c14839f4c958bbea7b2458cfc5d8373a
+  appodeal_ads: a0da9a8ec821c4cd826b806b760ca53a4072499c
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  HCSStarRatingView: 1d18f79654735514cd6f00e6d90e38cb6320dc31
 
 PODFILE CHECKSUM: f32fb4e7c14f8b3ca19a369d7be425dd9241af27
 

@@ -3,10 +3,17 @@
 
 @implementation AppDelegate
 
-- (BOOL)application:(UIApplication *)application
-    didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   [GeneratedPluginRegistrant registerWithRegistry:self];
-  // Override point for customization after application launch.
+
+  // UIViewController *flutterViewController = self.window.rootViewController;
+
+  // self.navigationController = [[UINavigationController alloc] initWithRootViewController:flutterViewController];
+  // [self.navigationController setNavigationBarHidden:YES];
+
+  // self.window.rootViewController = self.navigationController;
+  // [self.window makeKeyAndVisible];
+
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 

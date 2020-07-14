@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.util.Log;
 
 import com.appodeal.ads.Appodeal;
+import com.appodeal.ads.Native;
 import com.appodeal.ads.RewardedVideoCallbacks;
 
 import java.util.HashMap;
@@ -87,7 +88,7 @@ final class MethodCallHandlerImpl implements MethodCallHandler, RewardedVideoCal
       for (int type2 : types) {
         type = type | this.appodealAdType(type2);
       }
-      Log.d(TAG, "INITIALIZE APPODEAL WITH KEY = " + appKey);
+      Appodeal.setRequiredNativeMediaAssetType(Native.MediaAssetType.ICON);
       Appodeal.initialize(activity, appKey, type);
       result.success(Boolean.TRUE);
     } else if (call.method.equals("showInterstitial")) {

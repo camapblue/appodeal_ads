@@ -7,6 +7,7 @@
 
 @property (nonatomic, strong) APDNativeAdQueue *nativeAdQueue;
 @property (nonatomic, strong) ASNativeView *nativeView;
+@property (nonatomic, strong) APDNativeAd *nativeAd;
 
 @end
 
@@ -53,12 +54,13 @@
 
 - (void)loadAd:(FlutterResult)result {
   UIViewController *rootViewController = [UIApplication sharedApplication].delegate.window.rootViewController;
-  APDNativeAd * nativeAd = [[self.nativeAdQueue getNativeAdsOfCount:1] firstObject];
-  if (nativeAd != nil) {
-    nativeAd.delegate = self;
+  self.nativeAd = [[self.nativeAdQueue getNativeAdsOfCount:1] firstObject];
+  if (self.nativeAd != nil) {
+    self.nativeAd.delegate = self;
   }
   
-  self.nativeView = [nativeAd getAdViewForController:rootViewController];
+  self.nativeView = [self.nativeAd getAdViewForController:rootViewController];
+  [self.nativeView bindData:self.nativeAd];
   [_container addSubview: self.nativeView];
 
   self.nativeView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -85,11 +87,15 @@
 }
 
 - (void)nativeAdWillLogImpression:(APDNativeAd *)nativeAd {
-
+  NSLog(@"Native Ad LOG Impression");
 }
 
 - (void)nativeAdWillLogUserInteraction:(APDNativeAd *)nativeAd {
+  NSLog(@"Native Ad LOG USER INTERACTION");
+}
 
+- (void)nativeAdDidExpired:(nonnull APDNativeAd *)nativeAd {
+  NSLog(@"Native Ad DID EXPIRED");
 }
 
 @end

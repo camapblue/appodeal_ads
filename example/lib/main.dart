@@ -40,10 +40,9 @@ class _MyAppState extends State<MyApp> {
       // You should use here your APP Key from Appodeal
       await Appodeal.instance.initialize(
           Platform.isIOS
-              ? 'c8bb661c14f938d1432fb4dbea6039e161a7131b59a23424'
-              : 'cb3c8169b432b037153cb1a4da35b64118b4328a22a2345b',
+              ? 'IOS_KEY'
+              : 'ANDROID_KEY',
           types);
-      print('FINISHED INIITIALIZE APPODEAL');
     } on PlatformException {}
 
     // If the widget was removed from the tree while the asynchronous platform
@@ -94,25 +93,21 @@ class _MyAppState extends State<MyApp> {
                 child: FlatButton(
                   onPressed: () async {
                     final isLoaded = await this.isNativeAdsLoaded(); 
-                    print('NATIVE AD IS LOADED = $isLoaded');
                     if (isLoaded && _nativeAdViewController != null) {
                       _nativeAdViewController.loadAd();
-
-                      await Future.delayed(Duration(seconds: 2));
-                      print('NO NEED RE-RENDER');
                     }
                   },
                   child: new Text('Load Native Ads'),
                 ),
               ),
+              SizedBox(height: 32,),
               Container(
                 width: double.infinity,
-                height: 128,
+                height: 108,
                 color: Colors.amberAccent,
                 child: _isFinishedInitialize
                 ? NativeAdView(
                   onNativeAdViewCreated: (controller) {
-                    print('NATIVE AD VIEW CREATED = $controller');
                     _nativeAdViewController = controller;
                   },
                 )

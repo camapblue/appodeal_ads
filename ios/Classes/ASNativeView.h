@@ -10,4 +10,6 @@
 
 @interface ASNativeView : UIView <APDNativeAdView>
 
+- (void)bindData:(APDNativeAd*)nativeAd;
+
 @end

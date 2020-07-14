@@ -7,6 +7,8 @@
 
 #import "ASNativeView.h"
 #import "AppodealAdsPlugin.h"
+#import <Appodeal/Appodeal.h>
+#import <HCSStarRatingView/HCSStarRatingView.h>
 
 @interface ASNativeView ()
 //required
@@ -15,8 +17,8 @@
 //optional
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *iconView;
-@property (weak, nonatomic) IBOutlet UIView *mediaContainerView;
-@property (weak, nonatomic) IBOutlet UIView *adChoicesView;
+@property (weak, nonatomic) IBOutlet UIImageView *adChoiceView;
+@property (weak, nonatomic) IBOutlet HCSStarRatingView *starRatingView;
 
 @end
 
@@ -35,17 +37,22 @@
 }
 
 - (void)drawRect:(CGRect)rect {
-    self.layer.cornerRadius = 16.0;
-    self.layer.masksToBounds = YES;
-    
     self.iconView.layer.cornerRadius = 8.0;
     self.iconView.layer.masksToBounds = YES;
     
     self.callToActionLabel.layer.cornerRadius = 8.0;
     self.callToActionLabel.layer.masksToBounds = YES;
+}
 
-    NSLog(@"TITLE = %@", self.titleLabel);
-    self.backgroundColor = [UIColor redColor];
+- (void)bindData:(APDNativeAd*)nativeAd {
+  [self.starRatingView setUserInteractionEnabled:false];
+  self.starRatingView.value = [nativeAd.starRating doubleValue];
+
+  NSBundle *b = [NSBundle bundleForClass:[self class]];
+  NSBundle *resourceBundle = [NSBundle bundleWithURL:[b URLForResource:@"AppodealBundle" withExtension:@"bundle"]];
+  NSString *fileName = [resourceBundle pathForResource:@"ad" ofType:@"png"];
+  UIImage *image = [UIImage imageWithContentsOfFile:fileName];
+  [self.adChoiceView setImage:image];
 }
 
 @end

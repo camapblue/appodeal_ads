@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -27,12 +28,12 @@ class _NativeAdViewState extends State<NativeAdView> {
     }
     return UiKitView(
       key: UniqueKey(),
-      creationParams: <String, dynamic>{
-        "width": MediaQuery.of(context).size.width,
-        "height": 128,
-      },
       viewType: 'plugins.appodeal/nativeAd',
-      creationParamsCodec: const StandardMessageCodec(),
+      gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>[
+        new Factory<OneSequenceGestureRecognizer>(
+          () => new EagerGestureRecognizer(),
+        ),
+      ].toSet(),
       onPlatformViewCreated: _onPlatformViewCreated,
     );
   }

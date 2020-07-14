@@ -54,9 +54,7 @@ public class FlutterNativeAdView implements PlatformView, MethodCallHandler {
   }
 
   private void loadAd(Result result) {
-    System.out.print("START LOAD ADS");
     List<NativeAd> ads = Appodeal.getNativeAds(1);
-    System.out.print("NUMBER ADS = " + ads.size());
 
     NativeAd nativeAd = ads.get(0);
 
@@ -103,9 +101,6 @@ public class FlutterNativeAdView implements PlatformView, MethodCallHandler {
 
     NativeIconView nativeIconView = nativeAdView.findViewById(R.id.icon);
     nativeAdView.setNativeIconView(nativeIconView);
-
-    NativeMediaView nativeMediaView = (NativeMediaView) nativeAdView.findViewById(R.id.appodeal_media_view_content);
-    nativeAdView.setNativeMediaView(nativeMediaView);
 
     nativeAdView.registerView(nativeAd);
     nativeAdView.setVisibility(View.VISIBLE);

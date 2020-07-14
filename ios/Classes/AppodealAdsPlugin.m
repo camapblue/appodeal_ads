@@ -22,7 +22,6 @@
     [registrar addMethodCallDelegate:methodHandler channel:[methodHandler channel]];
     [registrar registerViewFactory: [[NativeAdViewFactory alloc] initWithMessenger:registrar.messenger] withId:@"plugins.appodeal/nativeAd"];
     instance.registrar = registrar;
-    NSLog(@"FINISHED REGISTER NOW HEHE");
 }
 
 @end

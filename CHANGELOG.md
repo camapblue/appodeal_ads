@@ -17,3 +17,7 @@
 ## [0.2.4] - Published July 10, 2020.
 
 * Release: Refactor to use gradble instead of static libs for Android
+
+## [0.2.5] - Published July 13, 2020.
+
+* Release: Finish Native Ad for Android & iOS
