@@ -18,7 +18,7 @@
 }
 
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
-  UINavigationController *rootViewController = [UIApplication sharedApplication].delegate.window.rootViewController;
+  UIViewController *rootViewController = [UIApplication sharedApplication].delegate.window.rootViewController;
 
   if ([@"initialize" isEqualToString:call.method]) {
       NSString* appKey = call.arguments[@"appKey"];
@@ -56,8 +56,6 @@
             return AppodealAdTypeNativeAd;
         case 4:
             return AppodealAdTypeRewardedVideo;
-        case 5:
-            return AppodealAdTypeMREC;
             
         default:
             break;
@@ -80,23 +78,35 @@
 
 #pragma mark - RewardedVideo Delegate
 
-- (void)rewardedVideoDidLoadAd {
+- (void)rewardedVideoDidLoadAdIsPrecache:(BOOL)precache {
+    // rewarded video was loaded
     [_channel invokeMethod:@"onRewardedVideoLoaded" arguments:nil];
 }
-
+ 
 - (void)rewardedVideoDidFailToLoadAd {
+    // rewarded video ad failed to load
     [_channel invokeMethod:@"onRewardedVideoFailedToLoad" arguments:nil];
 }
 
+- (void)rewardedVideoDidFailToPresentWithError:(NSError *)error {
+    // rewarded video ad was loaded but failed to present due to ad netwotk error,
+    // placement settings or invalid creative.
+    // Error object that indicates error reason
+}
+ 
 - (void)rewardedVideoDidPresent {
+    // rewarded video was presented
     [_channel invokeMethod:@"onRewardedVideoPresent" arguments:nil];
 }
-
-- (void)rewardedVideoWillDismiss {
+ 
+- (void)rewardedVideoWillDismissAndWasFullyWatched:(BOOL)wasFullyWatched {
+    // rewarded video was closed.
+    // wasFullyWatched boolean flag indicated that user watch video fully
     [_channel invokeMethod:@"onRewardedVideoWillDismiss" arguments:nil];
 }
 
-- (void)rewardedVideoDidFinish:(NSUInteger)rewardAmount name:(NSString *)rewardName {
+- (void)rewardedVideoDidFinish:(float)rewardAmount name:(NSString *)rewardName {
+    // rewarded video finished with some reward
     NSDictionary *params = rewardName != nil ? @{
                                                  @"rewardAmount" : @(rewardAmount),
                                                  @"rewardType" : rewardName

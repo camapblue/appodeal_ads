@@ -21,3 +21,7 @@
 ## [0.2.5] - Published July 13, 2020.
 
 * Release: Finish Native Ad for Android & iOS
+
+## [0.2.6] - Published July 15, 2020.
+
+* Release: Fix crash bug for Reward Ad
