@@ -75,7 +75,7 @@
                     </attributedString>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qqI-1H-Rs7" customClass="HCSStarRatingView">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qqI-1H-Rs7" customClass="HCSStarRatingView">
                     <rect key="frame" x="108" y="76" width="172" height="24"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="tintColor" red="1" green="0.92156862745098034" blue="0.23137254901960785" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -85,7 +85,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.21568627450980393" green="0.50196078431372548" blue="0.098039215686274508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="0aq-Ka-m4t" firstAttribute="leading" secondItem="ug7-8P-s42" secondAttribute="trailing" constant="8" id="6V1-XK-UdG"/>
                 <constraint firstItem="ug7-8P-s42" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="8" id="BqV-uR-WT4"/>

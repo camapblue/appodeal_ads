@@ -25,3 +25,7 @@
 ## [0.2.6] - Published July 15, 2020.
 
 * Release: Fix crash bug for Reward Ad
+
+## [0.2.7] - Published July 21, 2020.
+
+* Release: Fix background color of Native Ad

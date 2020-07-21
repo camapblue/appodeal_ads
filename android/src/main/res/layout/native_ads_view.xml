@@ -2,8 +2,8 @@
 <com.appodeal.ads.NativeAdView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/native_ad_view"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#378019"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
     android:visibility="gone">
 
     <RelativeLayout
@@ -13,7 +13,7 @@
         <LinearLayout
             android:id="@+id/native_ad"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
 
             <com.appodeal.ads.NativeIconView
@@ -71,7 +71,7 @@
                           android:layout_height="0dp"
                           android:layout_weight="1"
                           android:ellipsize="end"
-                          android:maxLines="2"
+                          android:maxLines="3"
                           android:textColor="#ffffff" />
 
                 <LinearLayout

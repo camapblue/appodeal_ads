@@ -40,8 +40,8 @@ class _MyAppState extends State<MyApp> {
       // You should use here your APP Key from Appodeal
       await Appodeal.instance.initialize(
           Platform.isIOS
-              ? 'IOS_KEY'
-              : 'ANDROID_KEY',
+              ? 'c8bb661c14f938d1432fb4dbea6039e161a7131b59a23424'
+              : 'cb3c8169b432b037153cb1a4da35b64118b4328a22a2345b',
           types);
     } on PlatformException {}
 
@@ -92,7 +92,7 @@ class _MyAppState extends State<MyApp> {
                 color: Colors.red,
                 child: FlatButton(
                   onPressed: () async {
-                    final isLoaded = await this.isNativeAdsLoaded(); 
+                    final isLoaded = await this.isNativeAdsLoaded();
                     if (isLoaded && _nativeAdViewController != null) {
                       _nativeAdViewController.loadAd();
                     }
@@ -100,19 +100,22 @@ class _MyAppState extends State<MyApp> {
                   child: new Text('Load Native Ads'),
                 ),
               ),
-              SizedBox(height: 32,),
-              Container(
-                width: double.infinity,
-                height: 108,
-                color: Colors.amberAccent,
-                child: _isFinishedInitialize
-                ? NativeAdView(
-                  onNativeAdViewCreated: (controller) {
-                    _nativeAdViewController = controller;
-                  },
-                )
-                : Opacity(opacity: 0.0),
-              )
+              SizedBox(
+                height: 32,
+              ),
+              AspectRatio(
+                aspectRatio: 414 / 144,
+                child: Container(
+                  color: Colors.amberAccent,
+                  child: _isFinishedInitialize
+                      ? NativeAdView(
+                          onNativeAdViewCreated: (controller) {
+                            _nativeAdViewController = controller;
+                          },
+                        )
+                      : Opacity(opacity: 0.0),
+                ),
+              ),
             ],
           ),
         ),
