@@ -40,8 +40,8 @@ class _MyAppState extends State<MyApp> {
       // You should use here your APP Key from Appodeal
       await Appodeal.instance.initialize(
           Platform.isIOS
-              ? 'c8bb661c14f938d1432fb4dbea6039e161a7131b59a23424'
-              : 'cb3c8169b432b037153cb1a4da35b64118b4328a22a2345b',
+              ? 'IOS_KEY'
+              : 'ANDROID_KEY',
           types);
     } on PlatformException {}
 
@@ -65,58 +65,79 @@ class _MyAppState extends State<MyApp> {
       body: Padding(
         padding: EdgeInsets.only(top: 40.0),
         child: Center(
-          child: Column(
-            children: <Widget>[
-              Container(
-                height: 100.0,
-                color: Colors.green,
-                child: FlatButton(
-                  onPressed: () {
-                    this.loadRewarded();
-                  },
-                  child: new Text('Show Rewarded'),
+          child: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                Container(
+                  height: 100.0,
+                  color: Colors.green,
+                  child: FlatButton(
+                    onPressed: () {
+                      this.loadRewarded();
+                    },
+                    child: new Text('Show Rewarded'),
+                  ),
                 ),
-              ),
-              Container(
-                height: 100.0,
-                color: Colors.blue,
-                child: new FlatButton(
-                  onPressed: () {
-                    this.loadInterstital();
-                  },
-                  child: new Text('Show Interstitial'),
+                Container(
+                  height: 100.0,
+                  color: Colors.blue,
+                  child: new FlatButton(
+                    onPressed: () {
+                      this.loadInterstital();
+                    },
+                    child: new Text('Show Interstitial'),
+                  ),
                 ),
-              ),
-              Container(
-                height: 100.0,
-                color: Colors.red,
-                child: FlatButton(
-                  onPressed: () async {
-                    final isLoaded = await this.isNativeAdsLoaded();
-                    if (isLoaded && _nativeAdViewController != null) {
-                      _nativeAdViewController.loadAd();
-                    }
-                  },
-                  child: new Text('Load Native Ads'),
+                Container(
+                  height: 100.0,
+                  color: Colors.red,
+                  child: FlatButton(
+                    onPressed: () async {
+                      final isLoaded = await this.isNativeAdsLoaded();
+                      if (isLoaded && _nativeAdViewController != null) {
+                        _nativeAdViewController.loadAd();
+                      }
+                    },
+                    child: new Text('Load Native Ads'),
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 32,
-              ),
-              AspectRatio(
-                aspectRatio: 414 / 144,
-                child: Container(
-                  color: Colors.amberAccent,
-                  child: _isFinishedInitialize
-                      ? NativeAdView(
-                          onNativeAdViewCreated: (controller) {
-                            _nativeAdViewController = controller;
-                          },
-                        )
-                      : Opacity(opacity: 0.0),
+                SizedBox(
+                  height: 32,
                 ),
-              ),
-            ],
+                AspectRatio(
+                  aspectRatio: 414 / 144,
+                  child: Container(
+                    color: Colors.green[700],
+                    child: _isFinishedInitialize
+                        ? NativeAdView(
+                            onNativeAdViewCreated: (controller) {
+                              _nativeAdViewController = controller;
+                            },
+                          )
+                        : Opacity(opacity: 0.0),
+                  ),
+                ),
+                SizedBox(
+                  height: 32,
+                ),
+                AspectRatio(
+                  aspectRatio: 414 / 144,
+                  child: Container(
+                    color: Colors.green[700],
+                    child: _isFinishedInitialize
+                        ? NativeAdView(
+                            onNativeAdViewCreated: (controller) async {
+                              print('Load Ad with ID = ${controller.getId}');
+                              final result = await controller.loadAd();
+
+                              print('Load Ad SUCCESS = $result');
+                            },
+                          )
+                        : Opacity(opacity: 0.0),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

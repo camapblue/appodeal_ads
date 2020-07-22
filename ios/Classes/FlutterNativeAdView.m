@@ -13,7 +13,8 @@
 
 @implementation FlutterNativeAdView {
     FlutterMethodChannel* _channel;
-
+    int64_t _viewId;
+    bool _needLoadView;
     UIView *_container;
 }
 
@@ -22,7 +23,6 @@
     self = [super init];
     if (self) {
         _container = [[UIView alloc] initWithFrame:frame];
-        _container.backgroundColor = [UIColor greenColor];
 
         APDNativeAdSettings * setting = [APDNativeAdSettings new];
         setting.adViewClass = ASNativeView.class;
@@ -34,6 +34,9 @@
                                                       autocache:YES];
 
         [self.nativeAdQueue loadAd];
+
+        _viewId = viewId;
+        _needLoadView = NO;
     }
     __block FlutterNativeAdView *blocksafeSelf = self;
     _channel = [FlutterMethodChannel methodChannelWithName:channelName binaryMessenger:messenger];
@@ -48,16 +51,26 @@
         result(FlutterMethodNotImplemented);
       }
     }];
+    NSLog(@"INIT NATIVE AD VIEW FINISHED >> %d", viewId);
 
     return self;
 }
 
 - (void)loadAd:(FlutterResult)result {
-  UIViewController *rootViewController = [UIApplication sharedApplication].delegate.window.rootViewController;
-  self.nativeAd = [[self.nativeAdQueue getNativeAdsOfCount:1] firstObject];
-  if (self.nativeAd != nil) {
-    self.nativeAd.delegate = self;
+  NSArray *queue = [self.nativeAdQueue getNativeAdsOfCount:1];
+  NSLog(@"Load Ad >> ID = %d >> Total in queue = %d", _viewId, [queue count]);
+  self.nativeAd = [queue firstObject];
+  NSLog(@"Load Ad >> GET NATIVE = %@", self.nativeAd);
+  if (self.nativeAd == nil) {
+    _needLoadView = YES;
+    if (result != nil) {
+      result([NSNumber numberWithBool:NO]);
+    }
+    return;
   }
+
+  UIViewController *rootViewController = [UIApplication sharedApplication].delegate.window.rootViewController;
+  self.nativeAd.delegate = self;
   
   self.nativeView = [self.nativeAd getAdViewForController:rootViewController];
   [self.nativeView bindData:self.nativeAd];
@@ -70,8 +83,10 @@
       [self.nativeView.topAnchor constraintEqualToAnchor:_container.topAnchor],
       [self.nativeView.bottomAnchor constraintEqualToAnchor:_container.bottomAnchor]
   ]];
-
-  result([NSNumber numberWithBool:YES]);
+  _needLoadView = NO;
+  if (result != nil) {
+    result([NSNumber numberWithBool:YES]);
+  }
 }
 
 - (UIView*)view {
@@ -80,6 +95,10 @@
 
 - (void)adQueueAdIsAvailable:(APDNativeAdQueue *)adQueue ofCount:(NSUInteger)count {
   NSLog(@"Native Ad Queue is Available = %d", count);
+
+  if (count > 0 && _needLoadView) {
+    [self loadAd:nil];
+  }
 }
 
 - (void)adQueue:(APDNativeAdQueue *)adQueue failedWithError:(NSError *)error {

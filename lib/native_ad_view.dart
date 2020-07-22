@@ -48,12 +48,18 @@ class _NativeAdViewState extends State<NativeAdView> {
 }
 
 class NativeAdViewController {
+  final int _id;
   NativeAdViewController._(int id)
-      : _channel = new MethodChannel('plugins.appodeal/nativeAd_$id');
+      : _id = id,
+      _channel = new MethodChannel('plugins.appodeal/nativeAd_$id');
 
   final MethodChannel _channel;
 
-  Future<void> loadAd() async {
-    return _channel.invokeMethod('loadAd');
+  int get getId => _id;
+
+  Future<bool> loadAd() async {
+    final result = await _channel.invokeMethod('loadAd');
+
+    return result;
   }
 }

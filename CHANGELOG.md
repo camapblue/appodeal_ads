@@ -29,3 +29,15 @@
 ## [0.2.7] - Published July 21, 2020.
 
 * Release: Fix background color of Native Ad
+
+## [0.2.8] - Published July 21, 2020.
+
+* Release: Fix background color of Native Ad iOS
+
+## [0.2.9] - Published July 22, 2020.
+
+* Release: Fix crash bug for Native Ad iOS
+
+## [0.3.0] - Published July 22, 2020.
+
+* Release: Fix bug not showing Native Ad iOS
