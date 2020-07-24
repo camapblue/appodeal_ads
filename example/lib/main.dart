@@ -41,7 +41,7 @@ class _MyAppState extends State<MyApp> {
       await Appodeal.instance.initialize(
           Platform.isIOS
               ? 'IOS_KEY'
-              : 'ANDROID_KEY',
+              : '6c6731495cb337820b3e04081b288aa965426cdda76fc625',
           types);
     } on PlatformException {}
 
@@ -148,7 +148,8 @@ class _MyAppState extends State<MyApp> {
     bool loaded = await Appodeal.instance
         .isLoaded(AppodealAdType.AppodealAdTypeInterstitial);
     if (loaded) {
-      Appodeal.instance.showInterstitial();
+      final isShow = await Appodeal.instance.showInterstitial();
+      print('SHOW INTERSTITIAL >> $isShow');
     } else {
       print("No se ha cargado un Interstitial");
     }
@@ -158,7 +159,8 @@ class _MyAppState extends State<MyApp> {
     bool loaded = await Appodeal.instance
         .isLoaded(AppodealAdType.AppodealAdTypeRewardedVideo);
     if (loaded) {
-      Appodeal.instance.showRewardedVideo();
+      final isShow = await Appodeal.instance.showRewardedVideo();
+      print('SHOW REWARD AD >> $isShow');
     } else {
       print("No se ha cargado un Rewarded Video");
     }

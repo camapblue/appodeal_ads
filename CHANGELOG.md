@@ -41,3 +41,11 @@
 ## [0.3.0] - Published July 22, 2020.
 
 * Release: Fix bug not showing Native Ad iOS
+
+## [0.3.1] - Published July 22, 2020.
+
+* Release: Fix bug 
+
+## [0.3.2] - Published July 23, 2020.
+
+* Release: Fix bug show Native Ad Android

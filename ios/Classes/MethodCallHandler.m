@@ -33,11 +33,11 @@
       [Appodeal setLogLevel:APDLogLevelVerbose];
       result([NSNumber numberWithBool:YES]);
   } else if ([@"showInterstitial" isEqualToString:call.method]) {
-      [Appodeal showAd:AppodealShowStyleInterstitial rootViewController:rootViewController];
-      result([NSNumber numberWithBool:YES]);
+      BOOL isShow = [Appodeal showAd:AppodealShowStyleInterstitial rootViewController:rootViewController];
+      result([NSNumber numberWithBool:isShow]);
   } else if ([@"showRewardedVideo" isEqualToString:call.method]) {
-      [Appodeal showAd:AppodealShowStyleRewardedVideo rootViewController:rootViewController];
-      result([NSNumber numberWithBool:YES]);
+      BOOL isShow = [Appodeal showAd:AppodealShowStyleRewardedVideo rootViewController:rootViewController];
+      result([NSNumber numberWithBool:isShow]);
   } else if ([@"isLoaded" isEqualToString:call.method]) {
       NSNumber *type = call.arguments[@"type"];
       result([NSNumber numberWithBool:[Appodeal isReadyForShowWithStyle:[self showStyleFromParameter:type]]]);

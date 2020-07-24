@@ -45,7 +45,8 @@ public class FlutterNativeAdView implements PlatformView, MethodCallHandler {
   public void onMethodCall(MethodCall methodCall, MethodChannel.Result result) {
     switch (methodCall.method) {
       case "loadAd":
-        loadAd(result);
+        boolean isShow = loadAd();
+        result.success(isShow);
         break;
       default:
         result.notImplemented();
@@ -53,8 +54,11 @@ public class FlutterNativeAdView implements PlatformView, MethodCallHandler {
 
   }
 
-  private void loadAd(Result result) {
+  private boolean loadAd() {
     List<NativeAd> ads = Appodeal.getNativeAds(1);
+    if (ads.size() == 0) {
+      return false;
+    }
 
     NativeAd nativeAd = ads.get(0);
 
@@ -105,7 +109,7 @@ public class FlutterNativeAdView implements PlatformView, MethodCallHandler {
     nativeAdView.registerView(nativeAd);
     nativeAdView.setVisibility(View.VISIBLE);
 
-    result.success(null);
+    return true;
   }
 
   @Override

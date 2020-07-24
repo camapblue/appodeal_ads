@@ -70,17 +70,19 @@ class Appodeal {
   /*
     Shows an Interstitial in the root view controller or main activity
    */
-  Future showInterstitial() async {
+  Future<bool> showInterstitial() async {
     shouldCallListener = false;
-    _channel.invokeMethod('showInterstitial');
+    final result = await _channel.invokeMethod('showInterstitial');
+    return result;
   }
 
   /*
     Shows an Rewarded Video in the root view controller or main activity
    */
-  Future showRewardedVideo() async {
+  Future<bool> showRewardedVideo() async {
     shouldCallListener = true;
-    _channel.invokeMethod('showRewardedVideo');
+    final result = await _channel.invokeMethod('showRewardedVideo');
+    return result;
   }
 
   Future<bool> isLoaded(AppodealAdType type) async {
