@@ -1,12 +1,25 @@
 PODS:
+  - APDAppLovinAdapter (2.6.5.1):
+    - Appodeal (= 2.6.5)
+  - APDAppodealAdExchangeAdapter (2.6.5.1):
+    - Appodeal (= 2.6.5)
   - APDGoogleAdMobAdapter (2.6.5.1):
     - Appodeal (= 2.6.5)
     - Google-Mobile-Ads-SDK (~> 7.60.0)
+  - APDStartAppAdapter (2.6.5.1):
+    - Appodeal (= 2.6.5)
+  - APDVungleAdapter (2.6.5.1):
+    - Appodeal (= 2.6.5)
   - Appodeal (2.6.5)
   - appodeal_ads (0.0.1):
+    - APDAppLovinAdapter
+    - APDAppodealAdExchangeAdapter
     - APDGoogleAdMobAdapter
+    - APDStartAppAdapter
+    - APDVungleAdapter
     - Flutter
     - HCSStarRatingView
+    - StackConsentManager
   - Flutter (1.0.0)
   - Google-Mobile-Ads-SDK (7.60.0):
     - GoogleAppMeasurement (~> 6.0)
@@ -40,6 +53,7 @@ PODS:
   - nanopb/decode (1.30905.0)
   - nanopb/encode (1.30905.0)
   - PromisesObjC (1.2.9)
+  - StackConsentManager (1.0.1)
 
 DEPENDENCIES:
   - appodeal_ads (from `.symlinks/plugins/appodeal_ads/ios`)
@@ -47,7 +61,11 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - APDAppLovinAdapter
+    - APDAppodealAdExchangeAdapter
     - APDGoogleAdMobAdapter
+    - APDStartAppAdapter
+    - APDVungleAdapter
     - Appodeal
     - Google-Mobile-Ads-SDK
     - GoogleAppMeasurement
@@ -55,6 +73,7 @@ SPEC REPOS:
     - HCSStarRatingView
     - nanopb
     - PromisesObjC
+    - StackConsentManager
 
 EXTERNAL SOURCES:
   appodeal_ads:
@@ -63,9 +82,13 @@ EXTERNAL SOURCES:
     :path: Flutter
 
 SPEC CHECKSUMS:
+  APDAppLovinAdapter: 77fbe74ae827493992abee80265c1e441d32df05
+  APDAppodealAdExchangeAdapter: 349d775ef7c24084dea095f3e8d4007b9f104121
   APDGoogleAdMobAdapter: c8315113279071ea1f5f7328c962230ea01bc9c1
+  APDStartAppAdapter: adbcbb31b060c991d31b5dc84ff1c52e917f9410
+  APDVungleAdapter: beee76a91ba997636666b63dd61266b8140cf6b3
   Appodeal: 8b7785dda5b698d688fc9ff7872e2f8f395af638
-  appodeal_ads: 63490b0f9a65c7b600dd42de0c438fdd4acc0ddd
+  appodeal_ads: 7c1ddadcacc6f07aa0024a6f6b9025e1e142998f
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   Google-Mobile-Ads-SDK: d70efb31e7ea19fe99d466dc5d4788966b6914f8
   GoogleAppMeasurement: 8cd1f289d60e629cf16ab03363b9e89c776b9651
@@ -73,6 +96,7 @@ SPEC CHECKSUMS:
   HCSStarRatingView: 1d18f79654735514cd6f00e6d90e38cb6320dc31
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
+  StackConsentManager: 2e7c7512d4c1b5dddf248e7e9f78931d8d0142e8
 
 PODFILE CHECKSUM: 3a82c19ab8bce9c87a8175516c705b6f3bf9a9e0
 

@@ -17,7 +17,12 @@ A new flutter plugin project.
   s.public_header_files = 'Classes/**/*.h'
   s.resource_bundles = {"AppodealBundle" => ["Assets/*"] }
   s.dependency 'Flutter'
+  s.dependency 'APDAppLovinAdapter'
+  s.dependency 'APDAppodealAdExchangeAdapter'
   s.dependency 'APDGoogleAdMobAdapter'
+  s.dependency 'APDStartAppAdapter'
+  s.dependency 'APDVungleAdapter'
+  s.dependency 'StackConsentManager'
   s.dependency 'HCSStarRatingView'
   s.static_framework = true
   s.ios.deployment_target = '9.0'

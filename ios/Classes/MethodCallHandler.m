@@ -1,8 +1,15 @@
 #import "MethodCallHandler.h"
 #import <Appodeal/Appodeal.h>
+#import <StackConsentManager/StackConsentManager.h>
+
+@interface MethodCallHandler () <STKConsentManagerDisplayDelegate>
+
+@end
 
 @implementation MethodCallHandler {
   FlutterMethodChannel *_channel;
+  NSString *_appKey;
+  NSArray *_types;
 }
 
 - (instancetype )initMethodCallHandlerByMessenger:(NSObject<FlutterBinaryMessenger>*)messenger {
@@ -21,16 +28,13 @@
   UIViewController *rootViewController = [UIApplication sharedApplication].delegate.window.rootViewController;
 
   if ([@"initialize" isEqualToString:call.method]) {
-      NSString* appKey = call.arguments[@"appKey"];
-      NSArray* types = call.arguments[@"types"];
-      AppodealAdType type = types.count > 0 ? [self typeFromParameter:types.firstObject] : AppodealAdTypeInterstitial;
-      int i = 1;
-      while (i < types.count) {
-          type = type | [self typeFromParameter:types[i]];
-          i++;
-      }
-      [Appodeal initializeWithApiKey:appKey types:type];
-      [Appodeal setLogLevel:APDLogLevelVerbose];
+      // NSString* appKey = call.arguments[@"appKey"];
+      // NSArray* types = call.arguments[@"types"];
+      _appKey = call.arguments[@"appKey"];
+      _types = call.arguments[@"types"];
+
+      [self synchroniseConsent: rootViewController];
+      
       result([NSNumber numberWithBool:YES]);
   } else if ([@"showInterstitial" isEqualToString:call.method]) {
       BOOL isShow = [Appodeal showAd:AppodealShowStyleInterstitial rootViewController:rootViewController];
@@ -39,8 +43,9 @@
       BOOL isShow = [Appodeal showAd:AppodealShowStyleRewardedVideo rootViewController:rootViewController];
       result([NSNumber numberWithBool:isShow]);
   } else if ([@"isLoaded" isEqualToString:call.method]) {
-      NSNumber *type = call.arguments[@"type"];
-      result([NSNumber numberWithBool:[Appodeal isReadyForShowWithStyle:[self showStyleFromParameter:type]]]);
+      // NSNumber *type = call.arguments[@"type"];
+      // result([NSNumber numberWithBool:[Appodeal isReadyForShowWithStyle:[self showStyleFromParameter:type]]]);
+      result([NSNumber numberWithBool:YES]);
   } else {
     result(FlutterMethodNotImplemented);
   }
@@ -112,6 +117,87 @@
                                                  @"rewardType" : rewardName
                                                  }: nil;
     [_channel invokeMethod:@"onRewardedVideoFinished" arguments: params];
+}
+
+
+- (void)initializeSDK {
+    /// Custom settings
+    // [Appodeal setFramework:APDFrameworkNative version:@"1.0.0"]
+    // [Appodeal setTriggerPrecacheCallbacks:YES];
+    // [Appodeal setLocationTracking:YES];
+    /// Test Mode
+//     [Appodeal setTestingEnabled:YES];
+    
+    /// User Data
+    // [Appodeal setUserId:@"user_id"];
+    // [Appodeal setUserAge:1];
+    // [Appodeal setUserGender:AppodealUserGenderMale];
+    
+//     [Appodeal setLogLevel:APDLogLevelDebug];
+// //    [Appodeal setAutocache:YES types:AppodealAdTypeInterstitial | AppodealAdTypeRewardedVideo | AppodealAdTypeBanner];
+    
+//     AppodealAdType types = AppodealAdTypeInterstitial | AppodealAdTypeRewardedVideo | AppodealAdTypeBanner | AppodealAdTypeNativeAd;
+//     BOOL consent = STKConsentManager.sharedManager.consentStatus != STKConsentStatusNonPersonalized;
+//     NSLog(@"CONSENT = %d", consent);
+//     [Appodeal initializeWithApiKey:APP_KEY
+//                              types:types
+//                         hasConsent:consent];
+
+    // AppodealAdType type = _types.count > 0 ? [self typeFromParameter:_types.firstObject] : AppodealAdTypeInterstitial;
+    // int i = 1;
+    // while (i < _types.count) {
+    //     type = type | [self typeFromParameter:_types[i]];
+    //     i++;
+    // }
+    [Appodeal setLogLevel:APDLogLevelDebug];
+    [Appodeal setAutocache:YES types:AppodealAdTypeInterstitial | AppodealAdTypeRewardedVideo | AppodealAdTypeBanner];
+    // [Appodeal setTestingEnabled: YES];
+    BOOL consent = STKConsentManager.sharedManager.consentStatus != STKConsentStatusNonPersonalized;
+    NSLog(@"START INITIALIZE WITH CONSENT = %d", consent);
+    AppodealAdType type = AppodealAdTypeInterstitial | AppodealAdTypeRewardedVideo | AppodealAdTypeBanner | AppodealAdTypeNativeAd;
+    [Appodeal initializeWithApiKey:_appKey types:type hasConsent:consent];
+}
+
+- (void)synchroniseConsent:(UIViewController*)rootViewController {
+    __weak typeof(self) weakSelf = self;
+    [STKConsentManager.sharedManager synchronizeWithAppKey:_appKey completion:^(NSError *error) {
+        __strong typeof(self) strongSelf = weakSelf;
+        if (error) {
+            NSLog(@"Error while synchronising consent manager: %@", error);
+        }
+        
+        if (STKConsentManager.sharedManager.shouldShowConsentDialog != STKConsentBoolTrue) {
+          NSLog(@"Start Init Here Hehe");
+            [strongSelf initializeSDK];
+            return ;
+        }
+        
+        NSLog(@"Start Load Consent Dialog");
+        [STKConsentManager.sharedManager loadConsentDialog:^(NSError *error) {
+            if (error) {
+                NSLog(@"Error while loading consent dialog: %@", error);
+            }
+            
+            if (!STKConsentManager.sharedManager.isConsentDialogReady) {
+                [strongSelf initializeSDK];
+                return ;
+            }
+            [STKConsentManager.sharedManager showConsentDialogFromRootViewController:rootViewController
+                                                                            delegate:strongSelf];
+        }];
+    }];
+}
+
+#pragma mark - STKConsentManagerDisplayDelegate
+
+- (void)consentManagerWillShowDialog:(STKConsentManager *)consentManager {}
+
+- (void)consentManagerDidDismissDialog:(STKConsentManager *)consentManager {
+    [self initializeSDK];
+}
+
+- (void)consentManager:(STKConsentManager *)consentManager didFailToPresent:(NSError *)error {
+    [self initializeSDK];
 }
 
 @end

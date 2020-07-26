@@ -40,7 +40,7 @@ class _MyAppState extends State<MyApp> {
       // You should use here your APP Key from Appodeal
       await Appodeal.instance.initialize(
           Platform.isIOS
-              ? 'IOS_KEY'
+              ? 'dc412003b20f5933ad99eb19ea0c79eebd388949601d32e4'
               : '6c6731495cb337820b3e04081b288aa965426cdda76fc625',
           types);
     } on PlatformException {}
