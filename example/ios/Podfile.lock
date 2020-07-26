@@ -1,11 +1,45 @@
 PODS:
+  - APDGoogleAdMobAdapter (2.6.5.1):
+    - Appodeal (= 2.6.5)
+    - Google-Mobile-Ads-SDK (~> 7.60.0)
   - Appodeal (2.6.5)
   - appodeal_ads (0.0.1):
-    - Appodeal
+    - APDGoogleAdMobAdapter
     - Flutter
     - HCSStarRatingView
   - Flutter (1.0.0)
+  - Google-Mobile-Ads-SDK (7.60.0):
+    - GoogleAppMeasurement (~> 6.0)
+  - GoogleAppMeasurement (6.6.2):
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
+    - GoogleUtilities/MethodSwizzler (~> 6.0)
+    - GoogleUtilities/Network (~> 6.0)
+    - "GoogleUtilities/NSData+zlib (~> 6.0)"
+    - nanopb (~> 1.30905.0)
+  - GoogleUtilities/AppDelegateSwizzler (6.7.1):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+  - GoogleUtilities/Environment (6.7.1):
+    - PromisesObjC (~> 1.2)
+  - GoogleUtilities/Logger (6.7.1):
+    - GoogleUtilities/Environment
+  - GoogleUtilities/MethodSwizzler (6.7.1):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/Network (6.7.1):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (6.7.1)"
+  - GoogleUtilities/Reachability (6.7.1):
+    - GoogleUtilities/Logger
   - HCSStarRatingView (1.5)
+  - nanopb (1.30905.0):
+    - nanopb/decode (= 1.30905.0)
+    - nanopb/encode (= 1.30905.0)
+  - nanopb/decode (1.30905.0)
+  - nanopb/encode (1.30905.0)
+  - PromisesObjC (1.2.9)
 
 DEPENDENCIES:
   - appodeal_ads (from `.symlinks/plugins/appodeal_ads/ios`)
@@ -13,8 +47,14 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - APDGoogleAdMobAdapter
     - Appodeal
+    - Google-Mobile-Ads-SDK
+    - GoogleAppMeasurement
+    - GoogleUtilities
     - HCSStarRatingView
+    - nanopb
+    - PromisesObjC
 
 EXTERNAL SOURCES:
   appodeal_ads:
@@ -23,11 +63,17 @@ EXTERNAL SOURCES:
     :path: Flutter
 
 SPEC CHECKSUMS:
+  APDGoogleAdMobAdapter: c8315113279071ea1f5f7328c962230ea01bc9c1
   Appodeal: 8b7785dda5b698d688fc9ff7872e2f8f395af638
-  appodeal_ads: a0da9a8ec821c4cd826b806b760ca53a4072499c
+  appodeal_ads: 63490b0f9a65c7b600dd42de0c438fdd4acc0ddd
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  Google-Mobile-Ads-SDK: d70efb31e7ea19fe99d466dc5d4788966b6914f8
+  GoogleAppMeasurement: 8cd1f289d60e629cf16ab03363b9e89c776b9651
+  GoogleUtilities: e121a3867449ce16b0e35ddf1797ea7a389ffdf2
   HCSStarRatingView: 1d18f79654735514cd6f00e6d90e38cb6320dc31
+  nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
+  PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
 
-PODFILE CHECKSUM: f32fb4e7c14f8b3ca19a369d7be425dd9241af27
+PODFILE CHECKSUM: 3a82c19ab8bce9c87a8175516c705b6f3bf9a9e0
 
 COCOAPODS: 1.9.3
