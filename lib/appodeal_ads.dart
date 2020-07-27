@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 
 export 'native_ad_view.dart';
+export 'banner_ad_view.dart';
 
 enum AppodealAdType {
   AppodealAdTypeInterstitial,

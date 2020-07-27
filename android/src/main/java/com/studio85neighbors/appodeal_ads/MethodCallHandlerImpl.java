@@ -9,6 +9,7 @@ import com.appodeal.ads.Native;
 import com.appodeal.ads.RewardedVideoCallbacks;
 import com.appodeal.ads.InterstitialCallbacks;
 import com.appodeal.ads.utils.Log;
+import com.appodeal.ads.UserSettings;
 
 import java.util.HashMap;
 import java.util.List;
@@ -94,8 +95,10 @@ final class MethodCallHandlerImpl implements MethodCallHandler, RewardedVideoCal
         type = type | this.appodealAdType(type2);
       }
       Appodeal.setUserId(userId);
-      Appodeal.setAge(age);
+      Appodeal.setUserAge(age);
       Appodeal.setUserGender(gender.equals("male") ? UserSettings.Gender.MALE : UserSettings.Gender.FEMALE);
+      // set testing mode
+      Appodeal.setTesting(true);
 
       Appodeal.setRequiredNativeMediaAssetType(Native.MediaAssetType.ICON);
       Appodeal.initialize(activity, appKey, type);

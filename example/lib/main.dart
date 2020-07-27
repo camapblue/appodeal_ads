@@ -30,6 +30,7 @@ class _MyAppState extends State<MyApp> {
       types.add(AppodealAdType.AppodealAdTypeInterstitial);
       types.add(AppodealAdType.AppodealAdTypeRewardedVideo);
       types.add(AppodealAdType.AppodealAdTypeNativeAd);
+      types.add(AppodealAdType.AppodealAdTypeBanner);
       Appodeal.instance.videoListener =
           (RewardedVideoAdEvent event, {String rewardType, int rewardAmount}) {
         print("RewardedVideoAd event $event");
@@ -45,8 +46,7 @@ class _MyAppState extends State<MyApp> {
           types: types,
           userId: 'anonymous',
           age: 25,
-          gender: 'male'
-        );
+          gender: 'male');
     } on PlatformException {}
 
     // If the widget was removed from the tree while the asynchronous platform
@@ -131,13 +131,31 @@ class _MyAppState extends State<MyApp> {
                     child: _isFinishedInitialize
                         ? NativeAdView(
                             onNativeAdViewCreated: (controller) async {
-                              print('Load Ad with ID = ${controller.getId}');
+                              print(
+                                  'Load Native Ad with ID = ${controller.getId}');
                               final result = await controller.loadAd();
 
                               print('Load Ad SUCCESS = $result');
                             },
                           )
                         : Opacity(opacity: 0.0),
+                  ),
+                ),
+                SizedBox(
+                  height: 32,
+                ),
+                AspectRatio(
+                  aspectRatio: 414 / 144,
+                  child: Container(
+                    color: Colors.blue[700],
+                    child: BannerAdView(
+                      onBannerAdViewCreated: (controller) async {
+                        print('Load Banner Ad with ID = ${controller.getId}');
+                        final result = await controller.loadAd();
+
+                        print('Load Banner Ad SUCCESS = $result');
+                      },
+                    ),
                   ),
                 ),
               ],

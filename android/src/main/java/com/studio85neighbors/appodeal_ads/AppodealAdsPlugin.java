@@ -12,6 +12,8 @@ import io.flutter.plugin.common.PluginRegistry.Registrar;
 public class AppodealAdsPlugin implements FlutterPlugin, ActivityAware {
   @Nullable
   private MethodCallHandlerImpl methodCallHandler;
+  @Nullable
+  private BannerAdViewFactory bannerAdViewFactory;
 
   @Override
   public void onAttachedToEngine(@NonNull FlutterPluginBinding binding) {
@@ -20,6 +22,9 @@ public class AppodealAdsPlugin implements FlutterPlugin, ActivityAware {
 
     binding.getPlatformViewRegistry().registerViewFactory("plugins.appodeal/nativeAd",
         new NativeAdViewFactory(binding.getBinaryMessenger()));
+    bannerAdViewFactory = new BannerAdViewFactory(binding.getBinaryMessenger(), null);
+    binding.getPlatformViewRegistry().registerViewFactory("plugins.appodeal/bannerAd",
+        bannerAdViewFactory);
   }
 
   @Override
@@ -41,6 +46,8 @@ public class AppodealAdsPlugin implements FlutterPlugin, ActivityAware {
 
     registrar.platformViewRegistry().registerViewFactory("plugins.appodeal/nativeAd",
         new NativeAdViewFactory(registrar.messenger()));
+    registrar.platformViewRegistry().registerViewFactory("plugins.appodeal/bannerAd",
+        new BannerAdViewFactory(registrar.messenger(), registrar.activity()));
   }
 
   @Override
@@ -50,15 +57,17 @@ public class AppodealAdsPlugin implements FlutterPlugin, ActivityAware {
     }
 
     methodCallHandler.setActivity(binding.getActivity());
+    bannerAdViewFactory.setActivity(binding.getActivity());
   }
 
   @Override
   public void onDetachedFromActivity() {
-    if (methodCallHandler == null) {
+    if (methodCallHandler == null && bannerAdViewFactory == null) {
       return;
     }
 
     methodCallHandler.setActivity(null);
+    bannerAdViewFactory.setActivity(null);
   }
 
   @Override
