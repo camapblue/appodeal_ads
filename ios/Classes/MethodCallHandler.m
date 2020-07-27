@@ -140,7 +140,7 @@
     }
     [Appodeal setLogLevel:APDLogLevelDebug];
     [Appodeal setAutocache:YES types:AppodealAdTypeInterstitial | AppodealAdTypeRewardedVideo | AppodealAdTypeBanner];
-    [Appodeal setTestingEnabled: YES];
+    // [Appodeal setTestingEnabled: YES];
     BOOL consent = STKConsentManager.sharedManager.consentStatus != STKConsentStatusNonPersonalized;
     [Appodeal initializeWithApiKey:_appKey types:type hasConsent:consent];
 }

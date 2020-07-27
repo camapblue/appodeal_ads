@@ -1,6 +1,7 @@
 #import "AppodealAdsPlugin.h"
 #import "MethodCallHandler.h"
 #import "NativeAdViewFactory.h"
+#import "BannerAdViewFactory.h"
 #import <Appodeal/Appodeal.h>
 
 @implementation AppodealAdsPlugin
@@ -21,6 +22,7 @@
     [Appodeal setRewardedVideoDelegate:methodHandler];
     [registrar addMethodCallDelegate:methodHandler channel:[methodHandler channel]];
     [registrar registerViewFactory: [[NativeAdViewFactory alloc] initWithMessenger:registrar.messenger] withId:@"plugins.appodeal/nativeAd"];
+    [registrar registerViewFactory: [[BannerAdViewFactory alloc] initWithMessenger:registrar.messenger] withId:@"plugins.appodeal/bannerAd"];
     instance.registrar = registrar;
 }
 

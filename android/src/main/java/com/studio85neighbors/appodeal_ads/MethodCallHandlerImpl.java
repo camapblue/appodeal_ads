@@ -98,7 +98,7 @@ final class MethodCallHandlerImpl implements MethodCallHandler, RewardedVideoCal
       Appodeal.setUserAge(age);
       Appodeal.setUserGender(gender.equals("male") ? UserSettings.Gender.MALE : UserSettings.Gender.FEMALE);
       // set testing mode
-      Appodeal.setTesting(true);
+      // Appodeal.setTesting(true);
 
       Appodeal.setRequiredNativeMediaAssetType(Native.MediaAssetType.ICON);
       Appodeal.initialize(activity, appKey, type);

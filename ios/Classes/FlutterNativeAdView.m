@@ -42,9 +42,6 @@
     _channel = [FlutterMethodChannel methodChannelWithName:channelName binaryMessenger:messenger];
     [_channel setMethodCallHandler: ^(FlutterMethodCall *call, FlutterResult result) {
       if ([@"loadAd" isEqualToString:call.method]) {
-        bool isInitialized = [Appodeal isInitalizedForAdType: AppodealAdTypeNativeAd];
-        bool isInitializedInterstitial = [Appodeal isInitalizedForAdType: AppodealAdTypeInterstitial];
-
         [blocksafeSelf loadAd:result];
       } 
       else {
