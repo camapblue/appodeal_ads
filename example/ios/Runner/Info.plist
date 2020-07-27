@@ -46,7 +46,17 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-    <key>io.flutter.embedded_views_preview</key>
-    <true/>
+  <key>io.flutter.embedded_views_preview</key>
+  <true/>
+  <key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-3142818964471582~6933191045</string>
+  <key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Advertising</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>$(PRODUCT_NAME) needs your calendar to provide personalised advertising experience tailored to you</string>
+	<key>NSCameraUsageDescription</key>
+	<string>$(PRODUCT_NAME)</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>$(PRODUCT_NAME) needs your location for analytics and advertising purposes</string>
 </dict>
 </plist>

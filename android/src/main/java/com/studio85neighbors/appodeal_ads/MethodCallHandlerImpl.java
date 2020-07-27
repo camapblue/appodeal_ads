@@ -85,10 +85,18 @@ final class MethodCallHandlerImpl implements MethodCallHandler, RewardedVideoCal
     if (call.method.equals("initialize")) {
       String appKey = call.argument("appKey");
       List<Integer> types = call.argument("types");
+      String userId = call.argument("userId");
+      int age = call.argument("age");
+      String gender = call.argument("gender");
+
       int type = Appodeal.NONE;
       for (int type2 : types) {
         type = type | this.appodealAdType(type2);
       }
+      Appodeal.setUserId(userId);
+      Appodeal.setAge(age);
+      Appodeal.setUserGender(gender.equals("male") ? UserSettings.Gender.MALE : UserSettings.Gender.FEMALE);
+
       Appodeal.setRequiredNativeMediaAssetType(Native.MediaAssetType.ICON);
       Appodeal.initialize(activity, appKey, type);
       Appodeal.setLogLevel(Log.LogLevel.verbose);

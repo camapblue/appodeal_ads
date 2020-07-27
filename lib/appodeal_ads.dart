@@ -51,10 +51,13 @@ class Appodeal {
 
   static Appodeal get instance => _instance;
 
-  Future initialize(
+  Future initialize({
     String appKey,
     List<AppodealAdType> types,
-  ) async {
+    String userId,
+    int age,
+    String gender,
+  }) async {
     shouldCallListener = false;
     List<int> itypes = new List<int>();
     for (final type in types) {
@@ -64,6 +67,9 @@ class Appodeal {
     _channel.invokeMethod('initialize', <String, dynamic>{
       'appKey': appKey,
       'types': itypes,
+      'userId': userId,
+      'age': age,
+      'gender': gender
     });
   }
 

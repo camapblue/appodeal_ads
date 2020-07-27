@@ -62,6 +62,19 @@ target 'Runner' do
 
   # Keep pod path relative so it can be checked into Podfile.lock.
   pod 'Flutter', :path => 'Flutter'
+  pod 'APDAppLovinAdapter'
+  pod 'APDAppodealAdExchangeAdapter'
+  pod 'APDChartboostAdapter'
+  pod 'APDGoogleAdMobAdapter'
+  pod 'APDInMobiAdapter'
+  pod 'APDMintegralAdapter'
+  pod 'APDMyTargetAdapter'
+  pod 'APDPubnativeAdapter'
+  pod 'APDSmaatoAdapter'
+  pod 'APDStartAppAdapter'
+  pod 'APDUnityAdapter'
+  pod 'APDVungleAdapter'
+  pod 'APDYandexAdapter'
 
   # Plugin Pods
 

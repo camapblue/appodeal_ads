@@ -10,6 +10,10 @@
   FlutterMethodChannel *_channel;
   NSString *_appKey;
   NSArray *_types;
+
+  NSString *_userId;
+  int _age;
+  NSString *_gender;
 }
 
 - (instancetype )initMethodCallHandlerByMessenger:(NSObject<FlutterBinaryMessenger>*)messenger {
@@ -28,10 +32,13 @@
   UIViewController *rootViewController = [UIApplication sharedApplication].delegate.window.rootViewController;
 
   if ([@"initialize" isEqualToString:call.method]) {
-      // NSString* appKey = call.arguments[@"appKey"];
-      // NSArray* types = call.arguments[@"types"];
       _appKey = call.arguments[@"appKey"];
       _types = call.arguments[@"types"];
+
+      // user info
+      _userId = call.arguments[@"userId"];
+      _age = call.arguments[@"age"];
+      _gender = call.arguments[@"gender"];
 
       [self synchroniseConsent: rootViewController];
       
@@ -43,9 +50,8 @@
       BOOL isShow = [Appodeal showAd:AppodealShowStyleRewardedVideo rootViewController:rootViewController];
       result([NSNumber numberWithBool:isShow]);
   } else if ([@"isLoaded" isEqualToString:call.method]) {
-      // NSNumber *type = call.arguments[@"type"];
-      // result([NSNumber numberWithBool:[Appodeal isReadyForShowWithStyle:[self showStyleFromParameter:type]]]);
-      result([NSNumber numberWithBool:YES]);
+      NSNumber *type = call.arguments[@"type"];
+      result([NSNumber numberWithBool:[Appodeal isReadyForShowWithStyle:[self showStyleFromParameter:type]]]);
   } else {
     result(FlutterMethodNotImplemented);
   }
@@ -121,40 +127,21 @@
 
 
 - (void)initializeSDK {
-    /// Custom settings
-    // [Appodeal setFramework:APDFrameworkNative version:@"1.0.0"]
-    // [Appodeal setTriggerPrecacheCallbacks:YES];
-    // [Appodeal setLocationTracking:YES];
-    /// Test Mode
-//     [Appodeal setTestingEnabled:YES];
-    
     /// User Data
-    // [Appodeal setUserId:@"user_id"];
-    // [Appodeal setUserAge:1];
-    // [Appodeal setUserGender:AppodealUserGenderMale];
+    [Appodeal setUserId:_userId];
+    [Appodeal setUserAge:_age];
+    [Appodeal setUserGender:[_gender isEqualToString:@"male"] ? AppodealUserGenderMale : AppodealUserGenderFemale];
     
-//     [Appodeal setLogLevel:APDLogLevelDebug];
-// //    [Appodeal setAutocache:YES types:AppodealAdTypeInterstitial | AppodealAdTypeRewardedVideo | AppodealAdTypeBanner];
-    
-//     AppodealAdType types = AppodealAdTypeInterstitial | AppodealAdTypeRewardedVideo | AppodealAdTypeBanner | AppodealAdTypeNativeAd;
-//     BOOL consent = STKConsentManager.sharedManager.consentStatus != STKConsentStatusNonPersonalized;
-//     NSLog(@"CONSENT = %d", consent);
-//     [Appodeal initializeWithApiKey:APP_KEY
-//                              types:types
-//                         hasConsent:consent];
-
-    // AppodealAdType type = _types.count > 0 ? [self typeFromParameter:_types.firstObject] : AppodealAdTypeInterstitial;
-    // int i = 1;
-    // while (i < _types.count) {
-    //     type = type | [self typeFromParameter:_types[i]];
-    //     i++;
-    // }
+    AppodealAdType type = _types.count > 0 ? [self typeFromParameter:_types.firstObject] : AppodealAdTypeInterstitial;
+    int i = 1;
+    while (i < _types.count) {
+        type = type | [self typeFromParameter:_types[i]];
+        i++;
+    }
     [Appodeal setLogLevel:APDLogLevelDebug];
     [Appodeal setAutocache:YES types:AppodealAdTypeInterstitial | AppodealAdTypeRewardedVideo | AppodealAdTypeBanner];
-    // [Appodeal setTestingEnabled: YES];
+    [Appodeal setTestingEnabled: YES];
     BOOL consent = STKConsentManager.sharedManager.consentStatus != STKConsentStatusNonPersonalized;
-    NSLog(@"START INITIALIZE WITH CONSENT = %d", consent);
-    AppodealAdType type = AppodealAdTypeInterstitial | AppodealAdTypeRewardedVideo | AppodealAdTypeBanner | AppodealAdTypeNativeAd;
     [Appodeal initializeWithApiKey:_appKey types:type hasConsent:consent];
 }
 
