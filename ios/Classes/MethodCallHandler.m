@@ -51,6 +51,7 @@
       result([NSNumber numberWithBool:isShow]);
   } else if ([@"isLoaded" isEqualToString:call.method]) {
       NSNumber *type = call.arguments[@"type"];
+      NSLog(@"CHECKING LOADED = %@", type);
       result([NSNumber numberWithBool:[Appodeal isReadyForShowWithStyle:[self showStyleFromParameter:type]]]);
   } else {
     result(FlutterMethodNotImplemented);
@@ -78,9 +79,12 @@
     switch ([parameter intValue]) {
         case 0:
             return AppodealShowStyleInterstitial;
+        case 2:
+            return AppodealAdTypeBanner;
+        case 3:
+            return AppodealAdTypeNativeAd;
         case 4:
             return AppodealShowStyleRewardedVideo;
-            
         default:
             break;
     }
@@ -138,7 +142,7 @@
         type = type | [self typeFromParameter:_types[i]];
         i++;
     }
-    [Appodeal setLogLevel:APDLogLevelDebug];
+    // [Appodeal setLogLevel:APDLogLevelDebug];
     [Appodeal setAutocache:YES types:AppodealAdTypeInterstitial | AppodealAdTypeRewardedVideo | AppodealAdTypeBanner];
     // [Appodeal setTestingEnabled: YES];
     BOOL consent = STKConsentManager.sharedManager.consentStatus != STKConsentStatusNonPersonalized;

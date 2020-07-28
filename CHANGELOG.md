@@ -53,3 +53,19 @@
 ## [0.3.3] - Published July 26, 2020.
 
 * Release: Fix bug show Ads on iOS
+
+## [0.4.0] - Published July 27, 2020.
+
+* Release: Add Banner Ad for iOS & Android
+
+## [0.4.1] - Published July 27, 2020.
+
+* Release: Fix crash bug on Android for Banner view
+
+## [0.4.2] - Published July 27, 2020.
+
+* Release: Fix checking Banner view loaded
+
+## [0.4.3] - Published July 28, 2020.
+
+* Release: Fix bug to show Banner view

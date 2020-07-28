@@ -147,13 +147,18 @@ class _MyAppState extends State<MyApp> {
                 AspectRatio(
                   aspectRatio: 414 / 144,
                   child: Container(
-                    color: Colors.blue[700],
+                    color: Colors.orange[700],
                     child: BannerAdView(
                       onBannerAdViewCreated: (controller) async {
                         print('Load Banner Ad with ID = ${controller.getId}');
-                        final result = await controller.loadAd();
+                        final isLoaded = await this.isBannerAdLoaded();
+                        print('Is Loaded Banner Ad = $isLoaded');
 
-                        print('Load Banner Ad SUCCESS = $result');
+                        if (isLoaded) {
+                          final result = await controller.loadAd();
+
+                          print('Load Banner Ad SUCCESS = $result');
+                        }
                       },
                     ),
                   ),
@@ -190,5 +195,9 @@ class _MyAppState extends State<MyApp> {
 
   Future<bool> isNativeAdsLoaded() async {
     return Appodeal.instance.isLoaded(AppodealAdType.AppodealAdTypeNativeAd);
+  }
+
+  Future<bool> isBannerAdLoaded() async {
+    return Appodeal.instance.isLoaded(AppodealAdType.AppodealAdTypeBanner);
   }
 }

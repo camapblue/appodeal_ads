@@ -15,8 +15,9 @@ public class BannerAdViewFactory extends PlatformViewFactory {
 
     void setActivity(Activity activity) {
       this.activity = activity;
-
-      this.flutterBannerAdView.setActivity(activity);
+      if (this.flutterBannerAdView != null) {
+        this.flutterBannerAdView.setActivity(activity);
+      }
     }
 
     public BannerAdViewFactory(BinaryMessenger messenger, Activity activity) {

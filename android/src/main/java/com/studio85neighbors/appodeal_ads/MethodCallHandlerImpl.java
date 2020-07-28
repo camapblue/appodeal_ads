@@ -102,7 +102,7 @@ final class MethodCallHandlerImpl implements MethodCallHandler, RewardedVideoCal
 
       Appodeal.setRequiredNativeMediaAssetType(Native.MediaAssetType.ICON);
       Appodeal.initialize(activity, appKey, type);
-      Appodeal.setLogLevel(Log.LogLevel.verbose);
+      // Appodeal.setLogLevel(Log.LogLevel.verbose);
       result.success(Boolean.TRUE);
     } else if (call.method.equals("showInterstitial")) {
       boolean isShow = Appodeal.show(activity, Appodeal.INTERSTITIAL);
