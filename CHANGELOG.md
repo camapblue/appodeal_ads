@@ -69,3 +69,7 @@
 ## [0.4.3] - Published July 28, 2020.
 
 * Release: Fix bug to show Banner view
+
+## [0.4.4] - Published July 31, 2020.
+
+* Release: Fix bug crash on Android

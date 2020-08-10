@@ -25,7 +25,9 @@ public class FlutterBannerAdView implements PlatformView, MethodCallHandler {
     _activity = activity;
     if (_activity != null) {
       bannerAdView = Appodeal.getBannerView(_activity);
-      bannerAdView.setVisibility(View.INVISIBLE);
+      if (bannerAdView != null) {
+        bannerAdView.setVisibility(View.INVISIBLE);
+      }
     }
     methodChannel = new MethodChannel(messenger, "plugins.appodeal/bannerAd_" + id);
     methodChannel.setMethodCallHandler(this);
@@ -35,13 +37,21 @@ public class FlutterBannerAdView implements PlatformView, MethodCallHandler {
     _activity = activity;
 
     bannerAdView = Appodeal.getBannerView(_activity);
-    bannerAdView.setVisibility(View.INVISIBLE);
+    if (bannerAdView != null) {
+      bannerAdView.setVisibility(View.INVISIBLE);
+    }
   }
 
   @Override
   public void onMethodCall(MethodCall methodCall, MethodChannel.Result result) {
     switch (methodCall.method) {
       case "loadAd":
+        if (bannerAdView == null) {
+          bannerAdView = Appodeal.getBannerView(_activity);
+          if (bannerAdView != null) {
+            bannerAdView.setVisibility(View.INVISIBLE);
+          }
+        }
         boolean isShow = loadAd();
         result.success(isShow);
         break;
@@ -52,6 +62,9 @@ public class FlutterBannerAdView implements PlatformView, MethodCallHandler {
   }
 
   private boolean loadAd() {
+    if (bannerAdView == null) {
+      return false;
+    }
     Appodeal.show(_activity, Appodeal.BANNER_VIEW);
     bannerAdView.setVisibility(View.VISIBLE);
 
