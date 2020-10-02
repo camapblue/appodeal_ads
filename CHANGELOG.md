@@ -73,3 +73,7 @@
 ## [0.4.4] - Published July 31, 2020.
 
 * Release: Fix bug crash on Android
+
+## [0.4.5] - Published Oct 02, 2020.
+
+* Release: Add initialize without user required

@@ -1,6 +1,6 @@
 name: appodeal_ads
 description: A Flutter plugin for Appodel SDK
-version: 0.4.4
+version: 0.4.5
 homepage: https://github.com/camapblue/appodeal_ads
 
 environment:
@@ -17,6 +17,7 @@ dev_dependencies:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
+# rm ~/.pub-cache/credentials.json
 
 # The following section is specific to Flutter.
 flutter:

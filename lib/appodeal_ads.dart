@@ -55,9 +55,9 @@ class Appodeal {
   Future initialize({
     String appKey,
     List<AppodealAdType> types,
-    String userId,
-    int age,
-    String gender,
+    String userId = "anonymous",
+    int age = 25,
+    String gender = "male",
   }) async {
     shouldCallListener = false;
     List<int> itypes = new List<int>();
