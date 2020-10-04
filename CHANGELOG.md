@@ -77,3 +77,7 @@
 ## [0.4.5] - Published Oct 02, 2020.
 
 * Release: Add initialize without user required
+
+## [0.4.6] - Published Oct 04, 2020.
+
+* Release: Disable show console log by default

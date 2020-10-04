@@ -142,7 +142,7 @@
         type = type | [self typeFromParameter:_types[i]];
         i++;
     }
-    // [Appodeal setLogLevel:APDLogLevelDebug];
+    [Appodeal setLogLevel:APDLogLevelNone];
     [Appodeal setAutocache:YES types:AppodealAdTypeInterstitial | AppodealAdTypeRewardedVideo | AppodealAdTypeBanner];
     // [Appodeal setTestingEnabled: YES];
     BOOL consent = STKConsentManager.sharedManager.consentStatus != STKConsentStatusNonPersonalized;
