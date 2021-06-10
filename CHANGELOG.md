@@ -93,3 +93,15 @@
 ## [0.4.9] - Published Oct 04, 2020.
 
 * Release: Bugs fix iOS
+
+## [0.5.0] - Published Jun 10, 2021.
+
+* Release: Upgrade latest Appodeal
+
+## [0.5.1] - Published Jun 10, 2021.
+
+* Release: Upgrade Android Gradle
+
+## [0.5.2] - Published Jun 10, 2021.
+
+* Release: Upgrade iOS Podfile

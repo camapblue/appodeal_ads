@@ -1,122 +1,23 @@
 PODS:
-  - APDAppLovinAdapter (2.6.5.1):
-    - Appodeal (= 2.6.5)
-  - APDAppodealAdExchangeAdapter (2.6.5.1):
-    - Appodeal (= 2.6.5)
-  - APDChartboostAdapter (2.6.5.1):
-    - Appodeal (= 2.6.5)
-  - APDGoogleAdMobAdapter (2.6.5.1):
-    - Appodeal (= 2.6.5)
-    - Google-Mobile-Ads-SDK (~> 7.60.0)
-  - APDInMobiAdapter (2.6.5.1):
-    - Appodeal (= 2.6.5)
-  - APDMintegralAdapter (2.6.5.1):
-    - Appodeal (= 2.6.5)
-  - APDMyTargetAdapter (2.6.5.1):
-    - Appodeal (= 2.6.5)
-  - APDPubnativeAdapter (2.6.5.1):
-    - Appodeal (= 2.6.5)
-  - APDSmaatoAdapter (2.6.5.1):
-    - Appodeal (= 2.6.5)
-  - APDStartAppAdapter (2.6.5.1):
-    - Appodeal (= 2.6.5)
-  - APDUnityAdapter (2.6.5.1):
-    - Appodeal (= 2.6.5)
-  - APDVungleAdapter (2.6.5.1):
-    - Appodeal (= 2.6.5)
-  - APDYandexAdapter (2.6.5.1):
-    - Appodeal (= 2.6.5)
-    - YandexMobileMetrica (< 4.0.0, >= 3.2.0)
-  - Appodeal (2.6.5)
+  - Appodeal (2.7.5)
   - appodeal_ads (0.0.1):
     - Appodeal
     - Flutter
     - HCSStarRatingView
     - StackConsentManager
   - Flutter (1.0.0)
-  - Google-Mobile-Ads-SDK (7.60.0):
-    - GoogleAppMeasurement (~> 6.0)
-  - GoogleAppMeasurement (6.6.2):
-    - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
-    - GoogleUtilities/MethodSwizzler (~> 6.0)
-    - GoogleUtilities/Network (~> 6.0)
-    - "GoogleUtilities/NSData+zlib (~> 6.0)"
-    - nanopb (~> 1.30905.0)
-  - GoogleUtilities/AppDelegateSwizzler (6.7.1):
-    - GoogleUtilities/Environment
-    - GoogleUtilities/Logger
-    - GoogleUtilities/Network
-  - GoogleUtilities/Environment (6.7.1):
-    - PromisesObjC (~> 1.2)
-  - GoogleUtilities/Logger (6.7.1):
-    - GoogleUtilities/Environment
-  - GoogleUtilities/MethodSwizzler (6.7.1):
-    - GoogleUtilities/Logger
-  - GoogleUtilities/Network (6.7.1):
-    - GoogleUtilities/Logger
-    - "GoogleUtilities/NSData+zlib"
-    - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (6.7.1)"
-  - GoogleUtilities/Reachability (6.7.1):
-    - GoogleUtilities/Logger
   - HCSStarRatingView (1.5)
-  - nanopb (1.30905.0):
-    - nanopb/decode (= 1.30905.0)
-    - nanopb/encode (= 1.30905.0)
-  - nanopb/decode (1.30905.0)
-  - nanopb/encode (1.30905.0)
-  - PromisesObjC (1.2.9)
-  - StackConsentManager (1.0.1)
-  - YandexMobileMetrica (3.11.1):
-    - YandexMobileMetrica/Static (= 3.11.1)
-  - YandexMobileMetrica/Static (3.11.1):
-    - YandexMobileMetrica/Static/Core (= 3.11.1)
-    - YandexMobileMetrica/Static/Crashes (= 3.11.1)
-  - YandexMobileMetrica/Static/Core (3.11.1)
-  - YandexMobileMetrica/Static/Crashes (3.11.1):
-    - YandexMobileMetrica/Static/Core
+  - StackConsentManager (1.1.0)
 
 DEPENDENCIES:
-  - APDAppLovinAdapter
-  - APDAppodealAdExchangeAdapter
-  - APDChartboostAdapter
-  - APDGoogleAdMobAdapter
-  - APDInMobiAdapter
-  - APDMintegralAdapter
-  - APDMyTargetAdapter
-  - APDPubnativeAdapter
-  - APDSmaatoAdapter
-  - APDStartAppAdapter
-  - APDUnityAdapter
-  - APDVungleAdapter
-  - APDYandexAdapter
   - appodeal_ads (from `.symlinks/plugins/appodeal_ads/ios`)
   - Flutter (from `Flutter`)
 
 SPEC REPOS:
   trunk:
-    - APDAppLovinAdapter
-    - APDAppodealAdExchangeAdapter
-    - APDChartboostAdapter
-    - APDGoogleAdMobAdapter
-    - APDInMobiAdapter
-    - APDMintegralAdapter
-    - APDMyTargetAdapter
-    - APDPubnativeAdapter
-    - APDSmaatoAdapter
-    - APDStartAppAdapter
-    - APDUnityAdapter
-    - APDVungleAdapter
-    - APDYandexAdapter
     - Appodeal
-    - Google-Mobile-Ads-SDK
-    - GoogleAppMeasurement
-    - GoogleUtilities
     - HCSStarRatingView
-    - nanopb
-    - PromisesObjC
     - StackConsentManager
-    - YandexMobileMetrica
 
 EXTERNAL SOURCES:
   appodeal_ads:
@@ -125,31 +26,12 @@ EXTERNAL SOURCES:
     :path: Flutter
 
 SPEC CHECKSUMS:
-  APDAppLovinAdapter: 77fbe74ae827493992abee80265c1e441d32df05
-  APDAppodealAdExchangeAdapter: 349d775ef7c24084dea095f3e8d4007b9f104121
-  APDChartboostAdapter: 3554d81d48319279e85f4d0fca5919dd0fe3c2ba
-  APDGoogleAdMobAdapter: c8315113279071ea1f5f7328c962230ea01bc9c1
-  APDInMobiAdapter: 5ae0f7d42b61ca52d6bce80bd58cd8a5245b8ea8
-  APDMintegralAdapter: 5cc46993d88458fdf73a6f0d7c1d0d43052f0ced
-  APDMyTargetAdapter: 6131ba97b16f0f27b37e750d41266913dc373d48
-  APDPubnativeAdapter: 5a63681573a7daafe3470bf79835b8f7904bc01a
-  APDSmaatoAdapter: c27820b0b7977b6bee1fd2d2bb51b6ab7c1ea8f0
-  APDStartAppAdapter: adbcbb31b060c991d31b5dc84ff1c52e917f9410
-  APDUnityAdapter: d5067f01f5e4ee7317cc083d85ebcce8d771a408
-  APDVungleAdapter: beee76a91ba997636666b63dd61266b8140cf6b3
-  APDYandexAdapter: 9ba8920db634812f34c532684cf7532463ddd184
-  Appodeal: 8b7785dda5b698d688fc9ff7872e2f8f395af638
-  appodeal_ads: 5b6ae06ca7bec67cb328071e63f2559239b5278d
-  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
-  Google-Mobile-Ads-SDK: d70efb31e7ea19fe99d466dc5d4788966b6914f8
-  GoogleAppMeasurement: 8cd1f289d60e629cf16ab03363b9e89c776b9651
-  GoogleUtilities: e121a3867449ce16b0e35ddf1797ea7a389ffdf2
+  Appodeal: bbcfbf63be492476f235bac82af1afffdcec5684
+  appodeal_ads: 78ccc8985c66112544837665e268c0a3bc4594d8
+  Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
   HCSStarRatingView: 1d18f79654735514cd6f00e6d90e38cb6320dc31
-  nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
-  PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
-  StackConsentManager: 2e7c7512d4c1b5dddf248e7e9f78931d8d0142e8
-  YandexMobileMetrica: e985e1f77e405390a2d13f11741d86ff2f00c4ce
+  StackConsentManager: 943dff106851f9c8fd56f4516d6eb60b09907cdc
 
-PODFILE CHECKSUM: e1bc2705fe47bcc440105398ce3ba1928ec8d3df
+PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.1

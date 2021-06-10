@@ -21,5 +21,5 @@ A new flutter plugin project.
   s.dependency 'StackConsentManager'
   s.dependency 'HCSStarRatingView'
   s.static_framework = true
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '10.2'
 end

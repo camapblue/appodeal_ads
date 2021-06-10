@@ -1,18 +1,15 @@
 #import "AppDelegate.h"
 #import "GeneratedPluginRegistrant.h"
+#import <AppTrackingTransparency/AppTrackingTransparency.h>
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-  [GeneratedPluginRegistrant registerWithRegistry:self];
-
-  // UIViewController *flutterViewController = self.window.rootViewController;
-
-  // self.navigationController = [[UINavigationController alloc] initWithRootViewController:flutterViewController];
-  // [self.navigationController setNavigationBarHidden:YES];
-
-  // self.window.rootViewController = self.navigationController;
-  // [self.window makeKeyAndVisible];
+    __block AppDelegate* safeSelf = self;
+    [ATTrackingManager requestTrackingAuthorizationWithCompletionHandler:^(ATTrackingManagerAuthorizationStatus status) {
+        // Tracking authorization completed. Initialise Appodeal here.
+        [GeneratedPluginRegistrant registerWithRegistry: safeSelf];
+    }];
 
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }

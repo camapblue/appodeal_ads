@@ -13,6 +13,12 @@ For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials, 
 samples, guidance on mobile development, and a full API reference.
 
+- Test publish:
+`flutter pub publish --dry-run`
+
+- Publish:
+`flutter pub publish`
+
 ## Donations
 
 Please coffee for me if it's helpful for you. Thanks ^_^
