@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import java.util.Random;
 import java.util.List;
 
 import com.appodeal.ads.Appodeal;
@@ -55,12 +56,13 @@ public class FlutterNativeAdView implements PlatformView, MethodCallHandler {
   }
 
   private boolean loadAd() {
-    List<NativeAd> ads = Appodeal.getNativeAds(1);
+    List<NativeAd> ads = Appodeal.getNativeAds(5);
     if (ads.size() == 0) {
       return false;
     }
 
-    NativeAd nativeAd = ads.get(0);
+    int index = new Random().nextInt(ads.size());
+    NativeAd nativeAd = ads.get(index);
 
     TextView tvTitle = (TextView) nativeAdView.findViewById(R.id.tv_title);
     tvTitle.setText(nativeAd.getTitle());

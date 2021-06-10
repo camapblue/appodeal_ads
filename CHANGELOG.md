@@ -81,3 +81,15 @@
 ## [0.4.6] - Published Oct 04, 2020.
 
 * Release: Disable show console log by default
+
+## [0.4.7] - Published Oct 04, 2020.
+
+* Release: Add random Native Ads
+
+## [0.4.8] - Published Oct 04, 2020.
+
+* Release: Update Native Ad Layout
+
+## [0.4.9] - Published Oct 04, 2020.
+
+* Release: Bugs fix iOS

@@ -47,7 +47,9 @@
                         android:layout_margin="5dp"
                         android:layout_weight="1"
                         android:ellipsize="end"
-                        android:textSize="16sp"
+                        android:textSize="15sp"
+                        android:maxLines = "1"
+                        android:textStyle="bold"
                         android:textColor="#ffffff" />
 
                     <TextView
@@ -70,8 +72,10 @@
                           android:layout_width="match_parent"
                           android:layout_height="0dp"
                           android:layout_weight="1"
+                          android:textSize="14sp"
                           android:ellipsize="end"
                           android:maxLines="3"
+                          android:textStyle="normal"
                           android:textColor="#ffffff" />
 
                 <LinearLayout

@@ -48,6 +48,11 @@
   [self.starRatingView setUserInteractionEnabled:false];
   self.starRatingView.value = [nativeAd.starRating doubleValue];
 
+  self.titleLabel.font = [UIFont fontWithName:@"Futura-Bold" size:14];
+  self.titleLabel.numberOfLines = 1;
+  self.descriptionLabel.font = [UIFont fontWithName:@"Futura" size:13];
+  self.callToActionLabel.font = [UIFont fontWithName:@"Futura-Bold" size:13];
+
   NSBundle *b = [NSBundle bundleForClass:[self class]];
   NSBundle *resourceBundle = [NSBundle bundleWithURL:[b URLForResource:@"AppodealBundle" withExtension:@"bundle"]];
   NSString *fileName = [resourceBundle pathForResource:@"ad" ofType:@"png"];

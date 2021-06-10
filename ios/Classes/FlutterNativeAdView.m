@@ -54,9 +54,14 @@
 }
 
 - (void)loadAd:(FlutterResult)result {
-  NSArray *queue = [self.nativeAdQueue getNativeAdsOfCount:1];
+  NSArray *queue = [self.nativeAdQueue getNativeAdsOfCount:5];
   NSLog(@"Load Ad >> ID = %d >> Total in queue = %d", _viewId, [queue count]);
-  self.nativeAd = [queue firstObject];
+  if ([queue count] == 0) {
+    result([NSNumber numberWithBool:NO]);
+    return;
+  }
+  int index = arc4random() % [queue count];
+  self.nativeAd = [queue objectAtIndex:index];
   NSLog(@"Load Ad >> GET NATIVE = %@", self.nativeAd);
   if (self.nativeAd == nil) {
     _needLoadView = YES;

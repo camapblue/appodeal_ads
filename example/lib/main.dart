@@ -163,6 +163,28 @@ class _MyAppState extends State<MyApp> {
                     ),
                   ),
                 ),
+                SizedBox(
+                  height: 32,
+                ),
+                AspectRatio(
+                  aspectRatio: 414 / 144,
+                  child: Container(
+                    color: Colors.orange[700],
+                    child: BannerAdView(
+                      onBannerAdViewCreated: (controller) async {
+                        print('Load Banner Ad with ID = ${controller.getId}');
+                        final isLoaded = await this.isBannerAdLoaded();
+                        print('Is Loaded Banner Ad = $isLoaded');
+
+                        if (isLoaded) {
+                          final result = await controller.loadAd();
+
+                          print('Load Banner Ad SUCCESS = $result');
+                        }
+                      },
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

@@ -67,7 +67,6 @@ target 'Runner' do
   pod 'APDChartboostAdapter'
   pod 'APDGoogleAdMobAdapter'
   pod 'APDInMobiAdapter'
-  pod 'APDMintegralAdapter'
   pod 'APDMyTargetAdapter'
   pod 'APDPubnativeAdapter'
   pod 'APDSmaatoAdapter'
