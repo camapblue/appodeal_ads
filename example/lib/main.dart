@@ -75,35 +75,41 @@ class _MyAppState extends State<MyApp> {
                 Container(
                   height: 100.0,
                   color: Colors.green,
-                  child: FlatButton(
-                    onPressed: () {
-                      this.loadRewarded();
-                    },
-                    child: new Text('Show Rewarded'),
-                  ),
+                  child: _isFinishedInitialize
+                      ? FlatButton(
+                          onPressed: () {
+                            this.loadRewarded();
+                          },
+                          child: Text('Show Rewarded'),
+                        )
+                      : Text('Ads Not Ready'),
                 ),
                 Container(
                   height: 100.0,
                   color: Colors.blue,
-                  child: new FlatButton(
-                    onPressed: () {
-                      this.loadInterstital();
-                    },
-                    child: new Text('Show Interstitial'),
-                  ),
+                  child: _isFinishedInitialize
+                      ? FlatButton(
+                          onPressed: () {
+                            this.loadInterstital();
+                          },
+                          child: Text('Show Interstitial'),
+                        )
+                      : Text('Ads Not Ready'),
                 ),
                 Container(
                   height: 100.0,
                   color: Colors.red,
-                  child: FlatButton(
-                    onPressed: () async {
-                      final isLoaded = await this.isNativeAdsLoaded();
-                      if (isLoaded && _nativeAdViewController != null) {
-                        _nativeAdViewController.loadAd();
-                      }
-                    },
-                    child: new Text('Load Native Ads'),
-                  ),
+                  child: _isFinishedInitialize
+                      ? FlatButton(
+                          onPressed: () async {
+                            final isLoaded = await this.isNativeAdsLoaded();
+                            if (isLoaded && _nativeAdViewController != null) {
+                              _nativeAdViewController.loadAd();
+                            }
+                          },
+                          child: new Text('Load Native Ads'),
+                        )
+                      : Text('Ads Not Ready'),
                 ),
                 SizedBox(
                   height: 32,
@@ -118,7 +124,7 @@ class _MyAppState extends State<MyApp> {
                               _nativeAdViewController = controller;
                             },
                           )
-                        : Opacity(opacity: 0.0),
+                        : const SizedBox(),
                   ),
                 ),
                 SizedBox(
@@ -138,7 +144,7 @@ class _MyAppState extends State<MyApp> {
                               print('Load Ad SUCCESS = $result');
                             },
                           )
-                        : Opacity(opacity: 0.0),
+                        : const SizedBox(),
                   ),
                 ),
                 SizedBox(
@@ -148,19 +154,22 @@ class _MyAppState extends State<MyApp> {
                   aspectRatio: 414 / 144,
                   child: Container(
                     color: Colors.orange[700],
-                    child: BannerAdView(
-                      onBannerAdViewCreated: (controller) async {
-                        print('Load Banner Ad with ID = ${controller.getId}');
-                        final isLoaded = await this.isBannerAdLoaded();
-                        print('Is Loaded Banner Ad = $isLoaded');
+                    child: _isFinishedInitialize
+                        ? BannerAdView(
+                            onBannerAdViewCreated: (controller) async {
+                              print(
+                                  'Load Banner Ad with ID = ${controller.getId}');
+                              final isLoaded = await this.isBannerAdLoaded();
+                              print('Is Loaded Banner Ad = $isLoaded');
 
-                        if (isLoaded) {
-                          final result = await controller.loadAd();
+                              if (isLoaded) {
+                                final result = await controller.loadAd();
 
-                          print('Load Banner Ad SUCCESS = $result');
-                        }
-                      },
-                    ),
+                                print('Load Banner Ad SUCCESS = $result');
+                              }
+                            },
+                          )
+                        : Text('Ads Not Ready'),
                   ),
                 ),
                 SizedBox(
@@ -170,19 +179,22 @@ class _MyAppState extends State<MyApp> {
                   aspectRatio: 414 / 144,
                   child: Container(
                     color: Colors.orange[700],
-                    child: BannerAdView(
-                      onBannerAdViewCreated: (controller) async {
-                        print('Load Banner Ad with ID = ${controller.getId}');
-                        final isLoaded = await this.isBannerAdLoaded();
-                        print('Is Loaded Banner Ad = $isLoaded');
+                    child: _isFinishedInitialize
+                        ? BannerAdView(
+                            onBannerAdViewCreated: (controller) async {
+                              print(
+                                  'Load Banner Ad with ID = ${controller.getId}');
+                              final isLoaded = await this.isBannerAdLoaded();
+                              print('Is Loaded Banner Ad = $isLoaded');
 
-                        if (isLoaded) {
-                          final result = await controller.loadAd();
+                              if (isLoaded) {
+                                final result = await controller.loadAd();
 
-                          print('Load Banner Ad SUCCESS = $result');
-                        }
-                      },
-                    ),
+                                print('Load Banner Ad SUCCESS = $result');
+                              }
+                            },
+                          )
+                        : Text('Ads Not Ready'),
                   ),
                 ),
               ],

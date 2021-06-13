@@ -14,12 +14,14 @@
   NSString *_userId;
   int _age;
   NSString *_gender;
+  bool _isInitialized;
 }
 
 - (instancetype )initMethodCallHandlerByMessenger:(NSObject<FlutterBinaryMessenger>*)messenger {
     self = [super init];
     if (self) {
         _channel = [FlutterMethodChannel methodChannelWithName:@"flutter_appodeal" binaryMessenger:messenger];
+        _isInitialized = false;
     }
     return self;
 }
@@ -44,15 +46,28 @@
       
       result([NSNumber numberWithBool:YES]);
   } else if ([@"showInterstitial" isEqualToString:call.method]) {
+    if (_isInitialized) {
       BOOL isShow = [Appodeal showAd:AppodealShowStyleInterstitial rootViewController:rootViewController];
       result([NSNumber numberWithBool:isShow]);
+    } else {
+      result([NSNumber numberWithBool:false]);
+    }
   } else if ([@"showRewardedVideo" isEqualToString:call.method]) {
+    if (_isInitialized) {
       BOOL isShow = [Appodeal showAd:AppodealShowStyleRewardedVideo rootViewController:rootViewController];
       result([NSNumber numberWithBool:isShow]);
+    } else {
+      result([NSNumber numberWithBool:false]);
+    }
   } else if ([@"isLoaded" isEqualToString:call.method]) {
+    if (_isInitialized) {
       NSNumber *type = call.arguments[@"type"];
       NSLog(@"CHECKING LOADED = %@", type);
-      result([NSNumber numberWithBool:[Appodeal isReadyForShowWithStyle:[self showStyleFromParameter:type]]]);
+      BOOL isShow = [Appodeal isReadyForShowWithStyle:[self showStyleFromParameter:type]];
+      result([NSNumber numberWithBool:isShow]);
+    } else {
+      result([NSNumber numberWithBool:false]);
+    }
   } else {
     result(FlutterMethodNotImplemented);
   }
@@ -136,17 +151,24 @@
     [Appodeal setUserAge:_age];
     [Appodeal setUserGender:[_gender isEqualToString:@"male"] ? AppodealUserGenderMale : AppodealUserGenderFemale];
     
-    AppodealAdType type = _types.count > 0 ? [self typeFromParameter:_types.firstObject] : AppodealAdTypeInterstitial;
+    AppodealAdType types = _types.count > 0 ? [self typeFromParameter:_types.firstObject] : AppodealAdTypeInterstitial;
     int i = 1;
     while (i < _types.count) {
-        type = type | [self typeFromParameter:_types[i]];
+        types = types | [self typeFromParameter:_types[i]];
         i++;
     }
     // [Appodeal setLogLevel:APDLogLevelNone];
     [Appodeal setAutocache:YES types:AppodealAdTypeInterstitial | AppodealAdTypeRewardedVideo | AppodealAdTypeBanner];
-    // [Appodeal setTestingEnabled: YES];
-    BOOL consent = STKConsentManager.sharedManager.consentStatus != STKConsentStatusNonPersonalized;
-    [Appodeal initializeWithApiKey:_appKey types:type hasConsent:consent];
+    [Appodeal setTestingEnabled: YES];
+
+    if (STKConsentManager.sharedManager.consent != nil) {
+        [Appodeal initializeWithApiKey:_appKey
+                                 types:types
+                         consentReport:STKConsentManager.sharedManager.consent];
+    } else {
+        [Appodeal initializeWithApiKey:_appKey types:types];
+    }
+    _isInitialized = true;
 }
 
 - (void)synchroniseConsent:(UIViewController*)rootViewController {
@@ -158,7 +180,7 @@
         }
         
         if (STKConsentManager.sharedManager.shouldShowConsentDialog != STKConsentBoolTrue) {
-          NSLog(@"Start Init Here Hehe");
+          NSLog(@"Start Init");
             [strongSelf initializeSDK];
             return ;
         }

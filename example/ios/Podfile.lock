@@ -1,5 +1,9 @@
 PODS:
-  - Appodeal (2.7.5)
+  - Appodeal (2.10.1):
+    - Protobuf (~> 3.12)
+    - StackCrashReporter (= 1.0.0-Beta)
+    - StackIAB (~> 1.4.1)
+    - StackModules (~> 1.1.0)
   - appodeal_ads (0.0.1):
     - Appodeal
     - Flutter
@@ -7,7 +11,56 @@ PODS:
     - StackConsentManager
   - Flutter (1.0.0)
   - HCSStarRatingView (1.5)
+  - Protobuf (3.17.0)
   - StackConsentManager (1.1.0)
+  - StackCrashReporter (1.0.0-Beta)
+  - StackIAB (1.4.2):
+    - StackIAB/StackIABAssets (= 1.4.2)
+    - StackIAB/StackMRAIDKit (= 1.4.2)
+    - StackIAB/StackNASTKit (= 1.4.2)
+    - StackIAB/StackOpenMeasure (= 1.4.2)
+    - StackIAB/StackRichMedia (= 1.4.2)
+    - StackIAB/StackVASTAssets (= 1.4.2)
+    - StackIAB/StackVASTKit (= 1.4.2)
+    - StackIAB/StackVideoPlayer (= 1.4.2)
+    - StackIAB/StackXML (= 1.4.2)
+    - StackModules (~> 1.1.0)
+  - StackIAB/StackIABAssets (1.4.2):
+    - StackModules (~> 1.1.0)
+  - StackIAB/StackMRAIDKit (1.4.2):
+    - StackIAB/StackIABAssets
+    - StackIAB/StackOpenMeasure
+    - StackModules (~> 1.1.0)
+  - StackIAB/StackNASTKit (1.4.2):
+    - StackIAB/StackVASTKit
+    - StackModules (~> 1.1.0)
+  - StackIAB/StackOpenMeasure (1.4.2):
+    - StackModules (~> 1.1.0)
+  - StackIAB/StackRichMedia (1.4.2):
+    - StackIAB/StackIABAssets
+    - StackIAB/StackVASTAssets
+    - StackIAB/StackVideoPlayer
+    - StackModules (~> 1.1.0)
+  - StackIAB/StackVASTAssets (1.4.2):
+    - StackIAB/StackIABAssets
+    - StackIAB/StackXML
+    - StackModules (~> 1.1.0)
+  - StackIAB/StackVASTKit (1.4.2):
+    - StackIAB/StackMRAIDKit
+    - StackIAB/StackVASTAssets
+    - StackIAB/StackVideoPlayer
+    - StackModules (~> 1.1.0)
+  - StackIAB/StackVideoPlayer (1.4.2):
+    - StackModules (~> 1.1.0)
+  - StackIAB/StackXML (1.4.2):
+    - StackModules (~> 1.1.0)
+  - StackModules (1.1.2):
+    - StackModules/StackProductPresentation (= 1.1.2)
+  - StackModules/StackFoundation (1.1.2)
+  - StackModules/StackProductPresentation (1.1.2):
+    - StackModules/StackUIKit
+  - StackModules/StackUIKit (1.1.2):
+    - StackModules/StackFoundation
 
 DEPENDENCIES:
   - appodeal_ads (from `.symlinks/plugins/appodeal_ads/ios`)
@@ -17,7 +70,11 @@ SPEC REPOS:
   trunk:
     - Appodeal
     - HCSStarRatingView
+    - Protobuf
     - StackConsentManager
+    - StackCrashReporter
+    - StackIAB
+    - StackModules
 
 EXTERNAL SOURCES:
   appodeal_ads:
@@ -26,11 +83,15 @@ EXTERNAL SOURCES:
     :path: Flutter
 
 SPEC CHECKSUMS:
-  Appodeal: bbcfbf63be492476f235bac82af1afffdcec5684
+  Appodeal: 1bb4a1d29eff4c30deab00ec04103ee0bf4279c1
   appodeal_ads: 78ccc8985c66112544837665e268c0a3bc4594d8
   Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
   HCSStarRatingView: 1d18f79654735514cd6f00e6d90e38cb6320dc31
+  Protobuf: 7327d4444215b5f18e560a97f879ff5503c4581c
   StackConsentManager: 943dff106851f9c8fd56f4516d6eb60b09907cdc
+  StackCrashReporter: 855bc6d59c5ab0a8103b1428e1d5d25abe61ed30
+  StackIAB: 75e842c68f6c68402de00bb4317fb9b8d76ab8bd
+  StackModules: bef01c7612030be6447787802983d02bdf27daff
 
 PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
 
