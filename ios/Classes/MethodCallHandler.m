@@ -62,7 +62,6 @@
   } else if ([@"isLoaded" isEqualToString:call.method]) {
     if (_isInitialized) {
       NSNumber *type = call.arguments[@"type"];
-      NSLog(@"CHECKING LOADED = %@", type);
       BOOL isShow = [Appodeal isReadyForShowWithStyle:[self showStyleFromParameter:type]];
       result([NSNumber numberWithBool:isShow]);
     } else {
@@ -159,7 +158,7 @@
     }
     // [Appodeal setLogLevel:APDLogLevelNone];
     [Appodeal setAutocache:YES types:AppodealAdTypeInterstitial | AppodealAdTypeRewardedVideo | AppodealAdTypeBanner];
-    [Appodeal setTestingEnabled: YES];
+    // [Appodeal setTestingEnabled: YES];
 
     if (STKConsentManager.sharedManager.consent != nil) {
         [Appodeal initializeWithApiKey:_appKey

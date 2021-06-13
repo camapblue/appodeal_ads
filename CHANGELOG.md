@@ -105,3 +105,7 @@
 ## [0.5.2] - Published Jun 10, 2021.
 
 * Release: Upgrade iOS Podfile
+
+## [0.5.4] - Published Jun 13, 2021.
+
+* Release: Bugs fix
