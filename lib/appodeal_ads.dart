@@ -52,7 +52,7 @@ class Appodeal {
 
   static Appodeal get instance => _instance;
 
-  Future initialize({
+  Future<bool> initialize({
     String appKey,
     List<AppodealAdType> types,
     String userId = "anonymous",
@@ -60,18 +60,19 @@ class Appodeal {
     String gender = "male",
   }) async {
     shouldCallListener = false;
-    List<int> itypes = new List<int>();
+    List<int> itypes = <int>[];
     for (final type in types) {
       itypes.add(type.index);
     }
     print('Start initialize Appodeal with key = $appKey');
-    _channel.invokeMethod('initialize', <String, dynamic>{
+    final result = await _channel.invokeMethod('initialize', <String, dynamic>{
       'appKey': appKey,
       'types': itypes,
       'userId': userId,
       'age': age,
       'gender': gender
     });
+    return result;
   }
 
   /*

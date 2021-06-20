@@ -26,7 +26,7 @@ class _MyAppState extends State<MyApp> {
   initPlatformState() async {
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      List<AppodealAdType> types = new List<AppodealAdType>();
+      List<AppodealAdType> types = <AppodealAdType>[];
       types.add(AppodealAdType.AppodealAdTypeInterstitial);
       types.add(AppodealAdType.AppodealAdTypeRewardedVideo);
       types.add(AppodealAdType.AppodealAdTypeNativeAd);
@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
         });
       };
       // You should use here your APP Key from Appodeal
-      await Appodeal.instance.initialize(
+      final result = await Appodeal.instance.initialize(
           appKey: Platform.isIOS
               ? 'dc412003b20f5933ad99eb19ea0c79eebd388949601d32e4'
               : '6c6731495cb337820b3e04081b288aa965426cdda76fc625',
@@ -47,6 +47,7 @@ class _MyAppState extends State<MyApp> {
           userId: 'anonymous',
           age: 25,
           gender: 'male');
+      print('ADs INIT RESULT >> $result');
     } on PlatformException {}
 
     // If the widget was removed from the tree while the asynchronous platform

@@ -14,14 +14,13 @@
   NSString *_userId;
   int _age;
   NSString *_gender;
-  bool _isInitialized;
+  FlutterResult _initializedResult;
 }
 
 - (instancetype )initMethodCallHandlerByMessenger:(NSObject<FlutterBinaryMessenger>*)messenger {
     self = [super init];
     if (self) {
         _channel = [FlutterMethodChannel methodChannelWithName:@"flutter_appodeal" binaryMessenger:messenger];
-        _isInitialized = false;
     }
     return self;
 }
@@ -42,31 +41,18 @@
       _age = call.arguments[@"age"];
       _gender = call.arguments[@"gender"];
 
+      _initializedResult = result;
       [self synchroniseConsent: rootViewController];
-      
-      result([NSNumber numberWithBool:YES]);
   } else if ([@"showInterstitial" isEqualToString:call.method]) {
-    if (_isInitialized) {
-      BOOL isShow = [Appodeal showAd:AppodealShowStyleInterstitial rootViewController:rootViewController];
-      result([NSNumber numberWithBool:isShow]);
-    } else {
-      result([NSNumber numberWithBool:false]);
-    }
+    BOOL isShow = [Appodeal showAd:AppodealShowStyleInterstitial rootViewController:rootViewController];
+    result([NSNumber numberWithBool:isShow]);
   } else if ([@"showRewardedVideo" isEqualToString:call.method]) {
-    if (_isInitialized) {
-      BOOL isShow = [Appodeal showAd:AppodealShowStyleRewardedVideo rootViewController:rootViewController];
-      result([NSNumber numberWithBool:isShow]);
-    } else {
-      result([NSNumber numberWithBool:false]);
-    }
+    BOOL isShow = [Appodeal showAd:AppodealShowStyleRewardedVideo rootViewController:rootViewController];
+    result([NSNumber numberWithBool:isShow]);
   } else if ([@"isLoaded" isEqualToString:call.method]) {
-    if (_isInitialized) {
-      NSNumber *type = call.arguments[@"type"];
-      BOOL isShow = [Appodeal isReadyForShowWithStyle:[self showStyleFromParameter:type]];
-      result([NSNumber numberWithBool:isShow]);
-    } else {
-      result([NSNumber numberWithBool:false]);
-    }
+    NSNumber *type = call.arguments[@"type"];
+    BOOL isShow = [Appodeal isReadyForShowWithStyle:[self showStyleFromParameter:type]];
+    result([NSNumber numberWithBool:isShow]);
   } else {
     result(FlutterMethodNotImplemented);
   }
@@ -158,7 +144,7 @@
     }
     // [Appodeal setLogLevel:APDLogLevelNone];
     [Appodeal setAutocache:YES types:AppodealAdTypeInterstitial | AppodealAdTypeRewardedVideo | AppodealAdTypeBanner];
-    // [Appodeal setTestingEnabled: YES];
+    [Appodeal setTestingEnabled: YES];
 
     if (STKConsentManager.sharedManager.consent != nil) {
         [Appodeal initializeWithApiKey:_appKey
@@ -167,7 +153,7 @@
     } else {
         [Appodeal initializeWithApiKey:_appKey types:types];
     }
-    _isInitialized = true;
+    _initializedResult([NSNumber numberWithBool:YES]);
 }
 
 - (void)synchroniseConsent:(UIViewController*)rootViewController {
@@ -202,14 +188,18 @@
 
 #pragma mark - STKConsentManagerDisplayDelegate
 
-- (void)consentManagerWillShowDialog:(STKConsentManager *)consentManager {}
+- (void)consentManagerWillShowDialog:(STKConsentManager *)consentManager {
+  NSLog(@"CONSENT MANAGER >> WILL SHOW DIALOG");
+}
 
 - (void)consentManagerDidDismissDialog:(STKConsentManager *)consentManager {
-    [self initializeSDK];
+  NSLog(@"CONSENT MANAGER >> DID DISMISS DIALOG");
+  [self initializeSDK];
 }
 
 - (void)consentManager:(STKConsentManager *)consentManager didFailToPresent:(NSError *)error {
-    [self initializeSDK];
+  NSLog(@"CONSENT MANAGER >> DID FAIL TO PRESENT");
+  [self initializeSDK];
 }
 
 @end

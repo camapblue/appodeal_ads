@@ -109,3 +109,7 @@
 ## [0.5.4] - Published Jun 13, 2021.
 
 * Release: Bugs fix
+
+## [0.6.0] - Published Jun 20, 2021.
+
+* Release: Fix initialized on iOS
