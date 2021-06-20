@@ -58,6 +58,7 @@ class Appodeal {
     String userId = "anonymous",
     int age = 25,
     String gender = "male",
+    bool isForTesting = false,
   }) async {
     shouldCallListener = false;
     List<int> itypes = <int>[];
@@ -70,7 +71,8 @@ class Appodeal {
       'types': itypes,
       'userId': userId,
       'age': age,
-      'gender': gender
+      'gender': gender,
+      'isForTesting': isForTesting ? 1 : 0
     });
     return result;
   }

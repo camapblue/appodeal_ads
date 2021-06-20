@@ -15,6 +15,7 @@
   int _age;
   NSString *_gender;
   FlutterResult _initializedResult;
+  int _isForTesting;
 }
 
 - (instancetype )initMethodCallHandlerByMessenger:(NSObject<FlutterBinaryMessenger>*)messenger {
@@ -35,11 +36,17 @@
   if ([@"initialize" isEqualToString:call.method]) {
       _appKey = call.arguments[@"appKey"];
       _types = call.arguments[@"types"];
-
+      
       // user info
       _userId = call.arguments[@"userId"];
-      _age = call.arguments[@"age"];
+      _age = (int)[[NSString stringWithFormat:@"%@", call.arguments[@"age"]] integerValue];
+
       _gender = call.arguments[@"gender"];
+      if (call.arguments[@"isForTesting"] != nil) {
+        _isForTesting = (int)[[NSString stringWithFormat:@"%@", call.arguments[@"isForTesting"]] integerValue];;
+      } else {
+        _isForTesting = 0;
+      }
 
       _initializedResult = result;
       [self synchroniseConsent: rootViewController];
@@ -144,7 +151,7 @@
     }
     // [Appodeal setLogLevel:APDLogLevelNone];
     [Appodeal setAutocache:YES types:AppodealAdTypeInterstitial | AppodealAdTypeRewardedVideo | AppodealAdTypeBanner];
-    [Appodeal setTestingEnabled: YES];
+    [Appodeal setTestingEnabled: _isForTesting == 1];
 
     if (STKConsentManager.sharedManager.consent != nil) {
         [Appodeal initializeWithApiKey:_appKey

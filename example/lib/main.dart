@@ -46,7 +46,9 @@ class _MyAppState extends State<MyApp> {
           types: types,
           userId: 'anonymous',
           age: 25,
-          gender: 'male');
+          gender: 'male',
+          isForTesting: true,
+        );
       print('ADs INIT RESULT >> $result');
     } on PlatformException {}
 
